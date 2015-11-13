@@ -1,6 +1,7 @@
 <?xml version="1.0"?>
-<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<project
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>org.figis-search</groupId>
@@ -56,18 +57,18 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
-		
+
 		<dependency>
-		    <groupId>org.glassfish.jersey.ext.cdi</groupId>
-		    <artifactId>jersey-cdi1x</artifactId>
-		    <version>${jersey.version}</version>
+			<groupId>org.glassfish.jersey.ext.cdi</groupId>
+			<artifactId>jersey-cdi1x</artifactId>
+			<version>${jersey.version}</version>
 		</dependency>
-		
+
 		<dependency>
-		    <groupId>javax.servlet</groupId>
-		    <artifactId>javax.servlet-api</artifactId>
-		    <version>3.1.0</version>
-		    <scope>provided</scope>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>3.1.0</version>
+			<scope>provided</scope>
 		</dependency>
 
 		<!-- required after has been added jersey-gf-cdi -->
@@ -89,21 +90,21 @@
 			<groupId>org.jboss</groupId>
 			<artifactId>jandex</artifactId>
 		</dependency>
-		
+
 		<!-- fixes tomcat deploy errors -->
 		<dependency>
 			<groupId>javax.el</groupId>
-     		<artifactId>el-api</artifactId>
-       		<version>[0.0.0,)</version>
+			<artifactId>el-api</artifactId>
+			<version>[0.0.0,)</version>
 			<scope>provided</scope>
 		</dependency>
-		
+
 		<!-- CACHE -->
 		<dependency>
-		    <groupId>net.sf.ehcache</groupId>
-		    <artifactId>ehcache</artifactId>
+			<groupId>net.sf.ehcache</groupId>
+			<artifactId>ehcache</artifactId>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>net.sf.ehcache</groupId>
 			<artifactId>ehcache-web</artifactId>
@@ -115,69 +116,69 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
-		
-		
+
+
 		<!-- SITEMAP -->
 		<dependency>
-		    <groupId>com.github.dfabulich</groupId>
-		    <artifactId>sitemapgen4j</artifactId>
-		    <version>1.0.3</version>
+			<groupId>com.github.dfabulich</groupId>
+			<artifactId>sitemapgen4j</artifactId>
+			<version>1.0.3</version>
 		</dependency>
-		
+
 		<!-- SWAGGER -->
 		<dependency>
-		    <groupId>com.wordnik</groupId>
-		    <artifactId>swagger-jersey2-jaxrs</artifactId>
-		    <version>1.5.3-M1</version>
-		    <exclusions>
-		    	<exclusion>
-		    		<artifactId>jersey-server</artifactId>
-		    		<groupId>org.glassfish.jersey.core</groupId>
-		    	</exclusion>
-		    	<exclusion>
-		    		<artifactId>
+			<groupId>com.wordnik</groupId>
+			<artifactId>swagger-jersey2-jaxrs</artifactId>
+			<version>1.5.3-M1</version>
+			<exclusions>
+				<exclusion>
+					<artifactId>jersey-server</artifactId>
+					<groupId>org.glassfish.jersey.core</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>
 		    			jersey-container-servlet-core
 		    		</artifactId>
-		    		<groupId>org.glassfish.jersey.containers</groupId>
-		    	</exclusion>
-		    	<exclusion>
-		    		<artifactId>jersey-media-multipart</artifactId>
-		    		<groupId>org.glassfish.jersey.media</groupId>
-		    	</exclusion>
-		    </exclusions>
+					<groupId>org.glassfish.jersey.containers</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>jersey-media-multipart</artifactId>
+					<groupId>org.glassfish.jersey.media</groupId>
+				</exclusion>
+			</exclusions>
 		</dependency>
-		
+
 		<!-- TEST -->
 		<dependency>
-		    <groupId>org.glassfish.jersey.test-framework</groupId>
-		    <artifactId>jersey-test-framework-core</artifactId>
-		    <version>${jersey.version}</version>
-		    <scope>test</scope>
-		    <exclusions>
-		    	<exclusion>
-		    		<artifactId>jersey-server</artifactId>
-		    		<groupId>org.glassfish.jersey.core</groupId>
-		    	</exclusion>
-		    	<exclusion>
-		    		<artifactId>
+			<groupId>org.glassfish.jersey.test-framework</groupId>
+			<artifactId>jersey-test-framework-core</artifactId>
+			<version>${jersey.version}</version>
+			<scope>test</scope>
+			<exclusions>
+				<exclusion>
+					<artifactId>jersey-server</artifactId>
+					<groupId>org.glassfish.jersey.core</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>
 		    			jersey-container-servlet-core
 		    		</artifactId>
-		    		<groupId>org.glassfish.jersey.containers</groupId>
-		    	</exclusion>
-		    </exclusions>
+					<groupId>org.glassfish.jersey.containers</groupId>
+				</exclusion>
+			</exclusions>
 		</dependency>
-		
+
 		<dependency>
-		    <groupId>org.glassfish.jersey.test-framework.providers</groupId>
-		    <artifactId>jersey-test-framework-provider-simple</artifactId>
-		    <version>${jersey.version}</version>
-		    <scope>test</scope>
+			<groupId>org.glassfish.jersey.test-framework.providers</groupId>
+			<artifactId>jersey-test-framework-provider-simple</artifactId>
+			<version>${jersey.version}</version>
+			<scope>test</scope>
 		</dependency>
 	</dependencies>
 
 
 	<build>
-		<finalName>figis-search-web</finalName>
+		<finalName>figis#search</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
