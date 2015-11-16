@@ -178,7 +178,7 @@
 
 
 	<build>
-		<finalName>figis#search</finalName>
+		<finalName>figis#ws#search</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
