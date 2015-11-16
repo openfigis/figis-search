@@ -7,8 +7,6 @@ import static org.junit.Assert.assertNotNull;
 
 import javax.inject.Inject;
 
-import org.figis.search.config.Configuration;
-import org.figis.search.config.ConfigurationProducer;
 import org.jglue.cdiunit.CdiRunner;
 import org.junit.Before;
 import org.junit.Ignore;
@@ -20,6 +18,9 @@ public class ConfigurationProducerTest {
 
 	@Inject
 	ConfigurationProducer p;
+
+	@Inject
+	Configuration c;
 
 	@Before
 	public void before() {
@@ -38,6 +39,7 @@ public class ConfigurationProducerTest {
 	public void buildConfiguration() {
 		Configuration config = p.buildConfiguration();
 		assertNotNull(config);
+		assertNotNull(c);
 	}
 
 }

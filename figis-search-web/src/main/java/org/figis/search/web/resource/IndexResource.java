@@ -4,14 +4,11 @@
 package org.figis.search.web.resource;
 
 import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-import org.figis.search.config.Configuration;
-import org.figis.search.service.IndexService;
 import org.figis.search.service.IndexStatus;
 
 import com.wordnik.swagger.annotations.Api;
@@ -31,11 +28,11 @@ public class IndexResource {
 
 	public static final String INDEX_PATH = "/index";
 
-	@Inject
-	private IndexService service;
-
-	@Inject
-	private Configuration configuration;
+	// @Inject
+	// private IndexService service;
+	//
+	// @Inject
+	// private Configuration configuration;
 
 	@GET
 	@Path("clear")
