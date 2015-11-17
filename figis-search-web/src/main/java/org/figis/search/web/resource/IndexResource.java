@@ -39,9 +39,7 @@ public class IndexResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	@ApiOperation(value = "Work on the index api", response = IndexStatus.class)
 	public IndexStatus clear() {
-
 		return new IndexStatus();
-
 	}
 
 }
