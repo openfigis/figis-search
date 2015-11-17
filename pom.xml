@@ -19,8 +19,8 @@
 	<modules>
 		<module>figis-search-web</module>
 		<module>figis-search-service</module>
-		
 		<module>figis-search-config</module>
+		<module>figis-search-xmlsearchenginecontrol</module>
 	</modules>
 
 	<build>
