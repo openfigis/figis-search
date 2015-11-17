@@ -15,7 +15,7 @@ import lombok.Data;
 @XmlRootElement(name = "XmlSearchEngineControl")
 public class XmlSearchEngineControl {
 
-	@XmlElements(value = { @XmlElement })
+	@XmlElements(@XmlElement(name = "objectType"))
 	private List<ObjectType> objectTypeList;
 
 }
