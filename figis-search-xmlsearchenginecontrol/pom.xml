@@ -9,6 +9,12 @@
 		<version>0.1</version>
 	</parent>
 
-	<artifactId>figis-search-config</artifactId>
+	<artifactId>figis-search-xmlsearchenginecontrol</artifactId>
 
+	<dependencies>
+		<dependency>
+			<groupId>org.figis-search</groupId>
+			<artifactId>figis-search-config</artifactId>
+		</dependency>
+	</dependencies>
 </project>
