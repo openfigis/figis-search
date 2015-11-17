@@ -14,7 +14,7 @@ public class FigisSearchJaxbTest {
 	@Test
 	public void test() {
 
-		File file = new File("/src/test/resources/SearchTerms.xml");
+		File file = new File("src/test/resources/SearchTerms.xml");
 
 		XmlSearchEngineControl c = m.unmarshall(file);
 		assertEquals(6, c.getObjectTypeList().size());
