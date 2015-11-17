@@ -185,6 +185,13 @@
 			    <version>1.10.19</version>
 			    <scope>test</scope>
 			</dependency>
+			<dependency>
+				<groupId>org.figis-search</groupId>
+				<artifactId>
+					figis-search-xmlsearchenginecontrol
+				</artifactId>
+				<version>0.1</version>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
 </project>

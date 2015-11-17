@@ -50,6 +50,15 @@
 			<artifactId>commons-logging</artifactId>
 			<version>1.2</version>
 		</dependency>
-		
+
+		<dependency>
+			<groupId>org.figis-search</groupId>
+			<artifactId>figis-search-xmlsearchenginecontrol</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.fao.factsheet</groupId>
+			<artifactId>factsheet-client</artifactId>
+			<version>0.0.6</version>
+		</dependency>
 	</dependencies>
 </project>
