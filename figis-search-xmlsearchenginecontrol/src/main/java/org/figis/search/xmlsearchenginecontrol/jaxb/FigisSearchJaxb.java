@@ -1,6 +1,7 @@
 package org.figis.search.xmlsearchenginecontrol.jaxb;
 
 import java.io.File;
+import java.io.InputStream;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -23,4 +24,20 @@ public class FigisSearchJaxb {
 		}
 
 	}
+
+	public XmlSearchEngineControl unmarshall() {
+
+		InputStream in = this.getClass().getClassLoader().getResourceAsStream("SearchTerms.xml");
+
+		JAXBContext context;
+		try {
+			context = JAXBContext.newInstance(XmlSearchEngineControl.class);
+			Unmarshaller unmarshaller = context.createUnmarshaller();
+			return (XmlSearchEngineControl) unmarshaller.unmarshal(in);
+		} catch (JAXBException e) {
+			throw new FigisSearchException(e);
+		}
+
+	}
+
 }

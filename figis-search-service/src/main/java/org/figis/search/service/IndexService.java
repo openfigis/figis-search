@@ -31,6 +31,7 @@ public class IndexService {
 			client.add(doc);
 			client.commit();
 		} catch (IOException | SolrServerException e) {
+			log.error(e.getMessage());
 			throw new FigisSearchException(e);
 		}
 		return response;
