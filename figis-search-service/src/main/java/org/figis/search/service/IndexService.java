@@ -13,11 +13,15 @@ import org.apache.solr.client.solrj.SolrClient;
 import org.apache.solr.client.solrj.SolrServerException;
 import org.apache.solr.client.solrj.impl.HttpSolrClient;
 import org.apache.solr.common.SolrInputDocument;
+import org.fao.fi.factsheetwebservice.domain.FactsheetDiscriminator;
 import org.fao.fi.factsheetwebservice.domain.FactsheetDomain;
 import org.fao.fi.factsheetwebservice.domain.FactsheetLanguage;
 import org.fao.fi.factsheetwebservice.domain.LanguageList;
 import org.fao.fi.services.factsheet.client.FactsheetWebServiceClient;
+import org.fao.fi.services.factsheet.logic.FactsheetUrlComposer;
+import org.fao.fi.services.factsheet.logic.FactsheetUrlComposerImpl;
 import org.figis.search.config.ref.FigisSearchException;
+import org.figis.search.service.util.FactsheetId;
 import org.figis.search.xmlsearchenginecontrol.ObjectType;
 import org.figis.search.xmlsearchenginecontrol.XmlSearchEngineControl;
 import org.figis.search.xmlsearchenginecontrol.jaxb.FigisSearchJaxb;
@@ -29,6 +33,13 @@ import lombok.extern.slf4j.Slf4j;
 public class IndexService {
 
 	/**
+	 * This dependency is a short cut. The factsheet webservice needs to be extended with this function
+	 */
+
+	FactsheetUrlComposer factsheetUrlComposer = new FactsheetUrlComposerImpl();
+	FactsheetId u = new FactsheetId();
+
+	/**
 	 * update or delete index of a single factsheet /{action}/index/{indexName}/domain/{factsheet
 	 * domain}/factsheet/{factsheetID}
 	 */
@@ -38,10 +49,20 @@ public class IndexService {
 
 		SolrInputDocument doc = composeDoc(domain, factsheet);
 
+		SolrInputDocument sd2 = new SolrInputDocument();
+		sd2.addField("id", factsheet);
+		sd2.addField("url", factsheet);
+
 		String response = IndexServiceResponse.APPLIED_UPDATE;
 		try {
+
+			// temporary one, delete this
+			client.deleteById(factsheet);
+
+			// logic
 			client.add(doc);
 			client.commit();
+
 		} catch (IOException | SolrServerException e) {
 			log.error(e.getMessage());
 			throw new FigisSearchException(e);
@@ -65,10 +86,11 @@ public class IndexService {
 				TransformerFactory tf = TransformerFactory.newInstance();
 				Transformer transformer = tf.newTransformer();
 				transformer.transform(domSource, result);
-				System.out.println("XML IN String format is: \n" + writer.toString());
+				// System.out.println("XML IN String format is: \n" + writer.toString());
 				sd.addField("full_name_e", writer.toString());
-				sd.addField("id", factsheet);
-				sd.addField("url", factsheet);
+				sd.addField("id", u.domain(domain).factsheet(factsheet).lang(language.toString()).compose());
+				FactsheetDiscriminator disc = new FactsheetDiscriminator(language, d, factsheet);
+				sd.addField("url", factsheetUrlComposer.composeFromDomainAndFactsheet(disc).replaceAll("/xml", ""));
 
 			} catch (TransformerException e) {
 				log.error(e.getMessage());

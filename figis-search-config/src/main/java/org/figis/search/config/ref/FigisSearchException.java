@@ -6,6 +6,10 @@ public class FigisSearchException extends RuntimeException {
 		super(e);
 	}
 
+	public FigisSearchException(String message) {
+		super(message);
+	}
+
 	/**
 	 * 
 	 */

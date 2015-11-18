@@ -1,49 +1,50 @@
 <?xml version="1.0"?>
-<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<project
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>org.figis-search</groupId>
 		<artifactId>figis-search-server</artifactId>
 		<version>0.1</version>
 	</parent>
-	
+
 	<artifactId>figis-search-service</artifactId>
-	
+
 	<dependencies>
 		<dependency>
-		    <groupId>org.figis-search</groupId>
-		    <artifactId>figis-search-config</artifactId>
+			<groupId>org.figis-search</groupId>
+			<artifactId>figis-search-config</artifactId>
 		</dependency>
-		
-		
+
+
 		<dependency>
-		    <groupId>net.sf.ehcache</groupId>
-		    <artifactId>ehcache</artifactId>
+			<groupId>net.sf.ehcache</groupId>
+			<artifactId>ehcache</artifactId>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.eclipse.persistence</groupId>
 			<artifactId>org.eclipse.persistence.moxy</artifactId>
 			<version>2.6.0</version>
 		</dependency>
-		
+
 		<dependency>
-		    <groupId>commons-io</groupId>
-		    <artifactId>commons-io</artifactId>
-		    <version>2.4</version>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>2.4</version>
 		</dependency>
-		
+
 		<dependency>
-		    <groupId>org.apache.solr</groupId>
-		    <artifactId>solr-solrj</artifactId>
-		    <version>5.0.0</version>
+			<groupId>org.apache.solr</groupId>
+			<artifactId>solr-solrj</artifactId>
+			<version>5.0.0</version>
 		</dependency>
-		
+
 		<dependency>
-		    <groupId>org.mockito</groupId>
-		    <artifactId>mockito-core</artifactId>
-		    <scope>test</scope>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-core</artifactId>
+			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>commons-logging</groupId>
@@ -59,6 +60,21 @@
 			<groupId>org.fao.factsheet</groupId>
 			<artifactId>factsheet-client</artifactId>
 			<version>0.0.6</version>
+		</dependency>
+
+
+		<!-- this dependency is a shortcut. It should be part of the factsheet 
+			webservice and therefore through the factsheet client -->
+		<dependency>
+			<groupId>org.fao.factsheet</groupId>
+			<artifactId>factsheet-services</artifactId>
+			<version>0.0.6</version>
+			<exclusions>
+				<exclusion>
+					<groupId>com.google.guava</groupId>
+					<artifactId>guava</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 	</dependencies>
 </project>
