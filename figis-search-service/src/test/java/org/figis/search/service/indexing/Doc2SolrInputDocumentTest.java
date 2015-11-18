@@ -20,11 +20,12 @@ public class Doc2SolrInputDocumentTest {
 
 	Doc2SolrInputDocument d = new Doc2SolrInputDocument();
 
+	String domain = "resource";
+
 	@Test
 	public void testExtract() {
-		SolrInputDocument s = d.extract(loadXML());
+		SolrInputDocument s = d.extract(loadXML()).basedOn(domain);
 		assertEquals(s, s);
-
 	}
 
 	public Document loadXML() {

@@ -21,6 +21,7 @@ import org.fao.fi.services.factsheet.client.FactsheetWebServiceClient;
 import org.fao.fi.services.factsheet.logic.FactsheetUrlComposer;
 import org.fao.fi.services.factsheet.logic.FactsheetUrlComposerImpl;
 import org.figis.search.config.ref.FigisSearchException;
+import org.figis.search.service.indexing.Doc2SolrInputDocument;
 import org.figis.search.service.util.FactsheetId;
 import org.figis.search.xmlsearchenginecontrol.ObjectType;
 import org.figis.search.xmlsearchenginecontrol.XmlSearchEngineControl;
@@ -38,6 +39,7 @@ public class IndexService {
 
 	FactsheetUrlComposer factsheetUrlComposer = new FactsheetUrlComposerImpl();
 	FactsheetId u = new FactsheetId();
+	Doc2SolrInputDocument prepare = new Doc2SolrInputDocument();
 
 	/**
 	 * update or delete index of a single factsheet /{action}/index/{indexName}/domain/{factsheet
@@ -73,14 +75,19 @@ public class IndexService {
 	private SolrInputDocument composeDoc(String domain, String factsheet) {
 		XmlSearchEngineControl c = new FigisSearchJaxb().unmarshall();
 		ObjectType o = c.getObjectTypeList().stream().filter(w -> w.getName().equals(domain)).findFirst().get();
+
 		FactsheetDomain d = FactsheetDomain.parseDomain(domain);
 		FactsheetWebServiceClient fc = new FactsheetWebServiceClient("http://www.fao.org/figis/ws/factsheets/");
 		LanguageList ll = fc.retrieveLanguageListInDomain4ThisFactsheet(d, factsheet);
 		SolrInputDocument sd = new SolrInputDocument();
+
 		for (FactsheetLanguage language : ll.getLanguageList()) {
 			Document doc = fc.retrieveFactsheet(factsheet, d, language);
 			try {
 				DOMSource domSource = new DOMSource(doc);
+
+				// SolrInputDocument ddd = prepare.extract(document).withHelpFrom(o);
+
 				StringWriter writer = new StringWriter();
 				StreamResult result = new StreamResult(writer);
 				TransformerFactory tf = TransformerFactory.newInstance();
