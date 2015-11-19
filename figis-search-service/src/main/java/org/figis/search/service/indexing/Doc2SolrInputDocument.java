@@ -7,6 +7,7 @@ import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
 
 import org.apache.solr.common.SolrInputDocument;
+import org.apache.solr.common.StringUtils;
 import org.figis.search.config.ref.FigisSearchException;
 import org.figis.search.xmlsearchenginecontrol.Element;
 import org.figis.search.xmlsearchenginecontrol.KeyWord;
@@ -34,22 +35,49 @@ public class Doc2SolrInputDocument {
 		XPath x = getXpath();
 		SolrInputDocument s = new SolrInputDocument();
 		for (KeyWord k : o.getKeyWordList()) {
-			if (k.getElementList() == null) {
-				System.out.println(k.getName());
-			}
 
-			for (Element e : k.getElementList()) {
-				String value = xpathSingleValue(x, o.getBase() + k.getBase() + e.getAttrSetting());
-				s.addField(e.getName(), value);
+			// the null check is for the concat problem, work in progress, see also
+			// /figis-search-xmlsearchenginecontrol/src/main/resources/SearchTerms.xsd
+			if (k.getElementList() != null) {
+				for (Element e : k.getElementList()) {
+					String expr = null;
+					String key = null;
+
+					if (e.getName() != null) {
+						key = e.getName();
+						System.out.println(o.getBase() + k.getBase() + e.getName());
+						expr = o.getBase() + "/" + k.getBase() + "/" + e.getName();
+						// expr = o.getBase() + k.getBase() + "/" + e.getName();
+						if (e.getAttrSetting() != null) {
+							expr = expr + e.getAttrSetting();
+						}
+					}
+					if (e.getAttr() != null) {
+						key = e.getAttr();
+						// fi:AqRes/fi:AqResIdent/fi:WaterAreaList/fi:WaterAreaRef/fi:ForeignID/ @Code
+						// [CodeSystem=iccat_smu_yft]
+						expr = o.getBase() + "/" + k.getBase() + "/ @" + e.getAttr();
+						if (e.getAttrSetting() != null) {
+							expr = expr + " [" + e.getAttrSetting() + "]";
+						}
+					}
+					if (expr.contains("null") || StringUtils.isEmpty(key)) {
+						throw new FigisSearchException(
+								"Some null values are not anticipated" + key + "; Expr = " + expr);
+					}
+
+					String value = xpathSingleValue(x, expr);
+					s.addField(key, value);
+				}
 			}
 		}
 		return s;
 	}
 
-	private String xpathSingleValue(XPath xPath, String note) {
+	private String xpathSingleValue(XPath xPath, String expr) {
 		try {
-			XPathExpression expr = xPath.compile(note);
-			return (String) expr.evaluate(document, XPathConstants.STRING);
+			XPathExpression exprCompiled = xPath.compile(expr);
+			return (String) exprCompiled.evaluate(document, XPathConstants.STRING);
 		} catch (XPathExpressionException e) {
 			throw new FigisSearchException(e);
 		}

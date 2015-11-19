@@ -11,11 +11,13 @@ import lombok.Data;
 @Data
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlRootElement(name = "element")
-@XmlType(name = "element", propOrder = { "name", "lang", "attrSetting" })
+@XmlType(name = "element", propOrder = { "name", "attr", "lang", "attrSetting" })
 public class Element {
 
 	@XmlAttribute
 	private String name;
+	@XmlAttribute
+	private String attr;
 	@XmlAttribute
 	private String lang;
 	@XmlAttribute
