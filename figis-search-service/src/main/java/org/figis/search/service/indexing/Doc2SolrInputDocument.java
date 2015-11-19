@@ -61,13 +61,20 @@ public class Doc2SolrInputDocument {
 							expr = expr + " [" + e.getAttrSetting() + "]";
 						}
 					}
-					if (expr.contains("null") || StringUtils.isEmpty(key)) {
+
+					if (expr.contains("null") || StringUtils.isEmpty(expr)) {
 						throw new FigisSearchException(
 								"Some null values are not anticipated" + key + "; Expr = " + expr);
 					}
-
 					String value = xpathSingleValue(x, expr);
-					s.addField(key, value);
+					// post condition
+					if (StringUtils.isEmpty(key) || StringUtils.isEmpty(value)) {
+						throw new FigisSearchException(
+								"Some null values are not anticipated, key =" + key + "; value = " + value);
+					} else {
+						s.addField(key, value);
+					}
+
 				}
 			}
 		}

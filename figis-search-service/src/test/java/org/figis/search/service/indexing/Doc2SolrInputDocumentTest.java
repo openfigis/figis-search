@@ -1,6 +1,7 @@
 package org.figis.search.service.indexing;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.fail;
 
 import java.io.File;
@@ -13,6 +14,7 @@ import javax.xml.transform.dom.DOMResult;
 import javax.xml.transform.stream.StreamSource;
 
 import org.apache.solr.common.SolrInputDocument;
+import org.apache.solr.common.StringUtils;
 import org.junit.Test;
 import org.w3c.dom.Document;
 
@@ -25,7 +27,15 @@ public class Doc2SolrInputDocumentTest {
 	@Test
 	public void testExtract() {
 		SolrInputDocument s = d.extract(loadXML()).basedOn(domain);
-		assertEquals(s, s);
+		assertEquals(9, s.getFieldNames().size());
+		s.getFieldValues(domain);
+		s.getFieldNames();
+		for (String k : s.getFieldNames()) {
+			System.out.println(k);
+
+			assertFalse(StringUtils.isEmpty(s.get(k).getValue().toString()));
+		}
+
 	}
 
 	public Document loadXML() {
