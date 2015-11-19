@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.example.org/NewXMLSchema"
+	xmlns:tns="http://www.example.org/NewXMLSchema" elementFormDefault="qualified">
+
+
+	<!-- This is an attempt to understand the concat element used in SearchTerms.xml, work not finished and used yet.  -->
+
+	<complexType name="KeyWordType">
+
+
+		<sequence>
+			<element name="concat" type="tns:ConcatType"></element>
+		</sequence>
+	</complexType>
+
+	<complexType name="ConcatType">
+		<sequence>
+			<element name="element" type="tns:ElementType"></element>
+			<element name="element" type="tns:ElementType"></element>
+		</sequence>
+	</complexType>
+
+
+
+
+
+	<complexType name="ElementType">
+	</complexType>
+
+
+	<element name="KeyWord" type="tns:KeyWordType"></element>
+
+
+</schema>
