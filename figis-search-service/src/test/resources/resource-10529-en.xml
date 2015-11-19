@@ -25,17 +25,23 @@
 					Type="Inter-Governmental Organization">
 					<fi:FigisID MetaID="104000">20010</fi:FigisID>
 					<dc:Title xml:lang="en">Commission for the Conservation of
-						Antarctic Marine Living Resources (CCAMLR)</dc:Title>
+						Antarctic Marine Living Resources (CCAMLR)
+					</dc:Title>
 					<dc:Title xml:lang="fr">Commission for the Conservation of
-						Antarctic Marine Living Resources (CCAMLR)</dc:Title>
+						Antarctic Marine Living Resources (CCAMLR)
+					</dc:Title>
 					<dc:Title xml:lang="es">Commission for the Conservation of
-						Antarctic Marine Living Resources (CCAMLR)</dc:Title>
+						Antarctic Marine Living Resources (CCAMLR)
+					</dc:Title>
 					<dc:Title xml:lang="ar">Commission for the Conservation of
-						Antarctic Marine Living Resources (CCAMLR)</dc:Title>
+						Antarctic Marine Living Resources (CCAMLR)
+					</dc:Title>
 					<dc:Title xml:lang="zh">Commission for the Conservation of
-						Antarctic Marine Living Resources (CCAMLR)</dc:Title>
+						Antarctic Marine Living Resources (CCAMLR)
+					</dc:Title>
 					<dc:Title xml:lang="ru">Commission for the Conservation of
-						Antarctic Marine Living Resources (CCAMLR)</dc:Title>
+						Antarctic Marine Living Resources (CCAMLR)
+					</dc:Title>
 					<fi:ForeignID Code="CCAMLR" CodeSystem="acronym" />
 					<fi:ContactEntry>
 						<fi:Telephone>+61 3 6231 0366</fi:Telephone>
@@ -51,7 +57,8 @@
 			<dc:Title xml:lang="en">Resource report</dc:Title>
 			<ags:CreatorCorporate xml:lang="en">CCAMLR
 				(Convention on the Conservation of Antarctic Marine Living
-				Resources)</ags:CreatorCorporate>
+				Resources)
+			</ags:CreatorCorporate>
 			<fi:Series xml:lang="en">FIRMS Reports</fi:Series>
 			<fi:Series xml:lang="fr">Rapports FIRMS</fi:Series>
 		</fi:CorporateCoverPage>
@@ -106,7 +113,8 @@
 					- High Latitude, Eastern Indian Ocean (Division 58.4.1)
 				</dcterms:Alternative>
 				<dcterms:Alternative>Euphausia superba - High Latitude, Eastern
-					Indian Ocean (Division 58.4.1)</dcterms:Alternative>
+					Indian Ocean (Division 58.4.1)
+				</dcterms:Alternative>
 			</fi:AdditionalRefData>
 		</fi:AqResIdent>
 		<fi:HabitatBio>
@@ -127,7 +135,8 @@
 			<fi:FisheryRef>
 				<fi:FigisID MetaID="205000">813</fi:FigisID>
 				<dc:Title xml:lang="en">Krill fishery - High Latitude, Eastern
-					Indian Ocean (Division 58.4.1)</dc:Title>
+					Indian Ocean (Division 58.4.1)
+				</dc:Title>
 				<dc:Title xml:lang="es">1976</dc:Title>
 				<fi:GeoReference>
 					<dc:Title>Southern Ocean</dc:Title>

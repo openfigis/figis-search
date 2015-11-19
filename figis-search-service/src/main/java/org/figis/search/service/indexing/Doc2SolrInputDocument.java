@@ -45,9 +45,7 @@ public class Doc2SolrInputDocument {
 
 					if (e.getName() != null) {
 						key = e.getName();
-						System.out.println(o.getBase() + k.getBase() + e.getName());
 						expr = o.getBase() + "/" + k.getBase() + "/" + e.getName();
-						// expr = o.getBase() + k.getBase() + "/" + e.getName();
 						if (e.getAttrSetting() != null) {
 							expr = expr + e.getAttrSetting();
 						}
@@ -66,6 +64,7 @@ public class Doc2SolrInputDocument {
 						throw new FigisSearchException(
 								"Some null values are not anticipated" + key + "; Expr = " + expr);
 					}
+					System.out.println(expr);
 					String value = xpathSingleValue(x, expr);
 					// post condition
 					if (StringUtils.isEmpty(key) || StringUtils.isEmpty(value)) {
