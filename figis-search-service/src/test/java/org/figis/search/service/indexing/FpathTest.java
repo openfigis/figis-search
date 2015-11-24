@@ -10,6 +10,7 @@ public class FpathTest extends Fpath {
 	Fpath fp = new Fpath();
 
 	String xpath = "/fi:FIGISDoc/fi:AqRes/fi:AqResIdent";
+	// String xpath = "/fi:FIGISDoc/fi:AqRes/fi:AqResIdent/fi:AdditionalRefData/dcterms:Alternative";
 
 	@Test
 	public void testXpathSingleValue() {
