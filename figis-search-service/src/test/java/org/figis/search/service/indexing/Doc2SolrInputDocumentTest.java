@@ -31,14 +31,13 @@ public class Doc2SolrInputDocumentTest {
 		s.getFieldValues(domain);
 		s.getFieldNames();
 		for (String k : s.getFieldNames()) {
-			System.out.println(k);
-
+			// System.out.println(k);
 			assertFalse(StringUtils.isEmpty(s.get(k).getValue().toString()));
 		}
 
 	}
 
-	public Document loadXML() {
+	public static Document loadXML() {
 
 		Source source = new StreamSource(new File("src/test/resources/resource-10529-en.xml"));
 		DOMResult result = new DOMResult();
