@@ -85,6 +85,10 @@
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-simple</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>org.apache.deltaspike.core</groupId>
+			<artifactId>deltaspike-core-impl</artifactId>
+		</dependency>
 	</dependencies>
 
 	<dependencyManagement>
@@ -192,6 +196,12 @@
 				<artifactId>cdi-unit</artifactId>
 				<version>3.1.2</version>
 				<scope>test</scope>
+				<exclusions>
+					<exclusion>
+						<groupId>org.apache.deltaspike.core</groupId>
+						<artifactId>deltaspike-core-impl</artifactId>
+					</exclusion>
+				</exclusions>
 			</dependency>
 			<dependency>
 				<groupId>org.mockito</groupId>
@@ -205,6 +215,11 @@
 					figis-search-xmlsearchenginecontrol
 				</artifactId>
 				<version>0.1</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.deltaspike.core</groupId>
+				<artifactId>deltaspike-core-impl</artifactId>
+				<version>1.5.1</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
