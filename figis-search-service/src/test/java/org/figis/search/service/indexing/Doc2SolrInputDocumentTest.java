@@ -27,14 +27,15 @@ public class Doc2SolrInputDocumentTest {
 	@Test
 	public void testExtract() {
 		SolrInputDocument s = d.extract(loadXML()).basedOn(domain);
-		assertEquals(9, s.getFieldNames().size());
+		assertEquals(15, s.getFieldNames().size());
 		s.getFieldValues(domain);
 		s.getFieldNames();
-		for (String k : s.getFieldNames()) {
-			// System.out.println(k);
-			assertFalse(StringUtils.isEmpty(s.get(k).getValue().toString()));
-		}
 
+		for (String fieldName : s.getFieldNames()) {
+			// System.out.println(fieldName);
+			assertFalse(StringUtils.isEmpty(fieldName));
+			assertFalse(fieldName.contains(":"));
+		}
 	}
 
 	public static Document loadXML() {

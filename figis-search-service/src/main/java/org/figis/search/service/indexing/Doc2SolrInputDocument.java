@@ -12,16 +12,35 @@ import org.figis.search.xmlsearchenginecontrol.XmlSearchEngineControl;
 import org.figis.search.xmlsearchenginecontrol.jaxb.FigisSearchJaxb;
 import org.w3c.dom.Document;
 
+/**
+ * Generate the document for Solr,
+ * 
+ * 
+ * @author Erik van Ingen
+ *
+ */
 public class Doc2SolrInputDocument {
 
 	private Fpath fp = new Fpath();
 	private Document document;
 
+	/**
+	 * extract the info from the document
+	 * 
+	 * @param document
+	 * @return
+	 */
 	public Doc2SolrInputDocument extract(Document document) {
 		this.document = document;
 		return this;
 	}
 
+	/**
+	 * specify the domain to which the factsheet belongs.
+	 * 
+	 * @param domain
+	 * @return
+	 */
 	public SolrInputDocument basedOn(String domain) {
 		if (document == null) {
 			new FigisSearchException("First use the extract method");
@@ -58,11 +77,12 @@ public class Doc2SolrInputDocument {
 						throw new FigisSearchException(
 								"Some null values are not anticipated, key = " + key + "; Expr = " + expr);
 					}
-					System.out.println(expr);
+					// System.out.println(expr);
 					String value = fp.xpathSingleValue(x, expr, document);
 					// post condition
 					if (!StringUtils.isEmpty(value)) {
-						s.addField(key, value);
+						System.out.println(k.getName() + " - " + value);
+						s.addField(k.getName(), value);
 					}
 				}
 			}

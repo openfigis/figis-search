@@ -17,12 +17,18 @@ public class IndexServiceTest {
 
 	String indexName = FigisSearchCore.FACTSHEET;
 	String domain = "resource";
-	String factsheetID = "10354";
 
 	@Test
 	public void testUpdate() {
+		String factsheetID = "10121";
 		assertNotNull(indexService);
 		indexService.update(indexName, domain, factsheetID);
+	}
+
+	@Test
+	public void testUpdateDomain() {
+		assertNotNull(indexService);
+		indexService.update(indexName, domain);
 	}
 
 }
