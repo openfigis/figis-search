@@ -1,6 +1,8 @@
 package org.figis.search.service;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 
 import javax.inject.Inject;
 
@@ -20,12 +22,14 @@ public class IndexServiceTest {
 
 	@Test
 	public void testUpdate() {
-		String factsheetID = "10121";
+		String factsheetID = "10382";
 		assertNotNull(indexService);
-		indexService.update(indexName, domain, factsheetID);
+		SingleResponse s = indexService.update(indexName, domain, factsheetID);
+		assertEquals(SingleResponse.OperationStatus.SUCCEEDED, s.getOperationStatus());
+		assertNull(s.getMessageList());
 	}
 
-	@Test
+	// @Test
 	public void testUpdateDomain() {
 		assertNotNull(indexService);
 		indexService.update(indexName, domain);

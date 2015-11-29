@@ -27,9 +27,7 @@ public class Doc2SolrInputDocumentTest {
 	@Test
 	public void testExtract() {
 		SolrInputDocument s = d.extract(loadXML()).basedOn(domain);
-		assertEquals(15, s.getFieldNames().size());
-		s.getFieldValues(domain);
-		s.getFieldNames();
+		assertEquals(17, s.getFieldNames().size(), 2);
 
 		for (String fieldName : s.getFieldNames()) {
 			// System.out.println(fieldName);

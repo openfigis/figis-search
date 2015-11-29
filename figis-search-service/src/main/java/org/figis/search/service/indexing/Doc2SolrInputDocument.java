@@ -49,6 +49,9 @@ public class Doc2SolrInputDocument {
 		ObjectType o = c.getObjectTypeList().stream().filter(w -> w.getName().equals(domain)).findFirst().get();
 		XPath x = fp.getXpath();
 		SolrInputDocument s = new SolrInputDocument();
+		s.setField("domain", o.getName());
+		s.setField("meta", o.getMeta());
+
 		for (KeyWord k : o.getKeyWordList()) {
 
 			// the null check is for the concat problem, work in progress, see also
