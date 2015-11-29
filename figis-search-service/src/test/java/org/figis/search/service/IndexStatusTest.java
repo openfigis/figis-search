@@ -9,14 +9,14 @@ public class IndexStatusTest {
 
 	@Test
 	public void testGetMessageList() {
-		SingleResponse is = new SingleResponse();
+		IndexResponse is = new IndexResponse();
 		assertNull(is.getMessageList());
 
 	}
 
 	@Test
 	public void testIndexStatus() {
-		assertEquals("FAILED", SingleResponse.OperationStatus.FAILED.toString());
+		assertEquals("FAILED", IndexResponse.OperationStatus.FAILED.toString());
 	}
 
 }

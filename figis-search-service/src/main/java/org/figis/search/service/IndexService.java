@@ -17,8 +17,7 @@ import org.fao.fi.services.factsheet.client.FactsheetClientException;
 import org.fao.fi.services.factsheet.client.FactsheetWebServiceClient;
 import org.fao.fi.services.factsheet.logic.FactsheetUrlComposer;
 import org.fao.fi.services.factsheet.logic.FactsheetUrlComposerImpl;
-import org.figis.search.config.ref.FigisSearchException;
-import org.figis.search.service.SingleResponse.OperationStatus;
+import org.figis.search.service.IndexResponse.OperationStatus;
 import org.figis.search.service.indexing.Doc2SolrInputDocument;
 import org.figis.search.service.util.FactsheetId;
 import org.w3c.dom.Document;
@@ -41,48 +40,67 @@ public class IndexService {
 	 * update or delete index of a single factsheet /{action}/index/{indexName}/domain/{factsheet
 	 * domain}/factsheet/{factsheetID}
 	 */
-	public SingleResponse update(String indexName, String domain) {
+	public IndexResponse update(String indexName, String domain) {
 		FactsheetDomain d = FactsheetDomain.parseDomain(domain);
 		FactsheetList l = fc.retrieveFactsheetListPerDomain(d);
-
-		BatchResponse br = new BatchResponse(new ArrayList<SolrInputDocument>());
-
+		IndexResponse domainIndexResponse = new IndexResponse();
+		domainIndexResponse.setMessageList(new ArrayList<String>());
+		boolean perfect = true;
 		for (FactsheetDiscriminator ds : l.getFactsheetList()) {
-			SingleResponse s = update(indexName, domain, ds.getFactsheet());
-			br.getMessageList().addAll(s.getMessageList());
+			IndexResponse singleFactsheetResponse = update(indexName, domain, ds.getFactsheet());
+			domainIndexResponse.getMessageList().addAll(singleFactsheetResponse.getMessageList());
+			if (singleFactsheetResponse.getOperationStatus().equals(IndexResponse.OperationStatus.PARTLY_SUCCEEDED)
+					|| singleFactsheetResponse.getOperationStatus().equals(IndexResponse.OperationStatus.FAILED)) {
+				domainIndexResponse.setOperationStatus(IndexResponse.OperationStatus.PARTLY_SUCCEEDED);
+				perfect = false;
+			}
 		}
-		SingleResponse s = new SingleResponse();
-
-		return s;
+		if (perfect) {
+			domainIndexResponse.setOperationStatus(IndexResponse.OperationStatus.SUCCEEDED);
+		}
+		return domainIndexResponse;
 	}
 
 	/**
 	 * update or delete index of a single factsheet /{action}/index/{indexName}/domain/{factsheet
 	 * domain}/factsheet/{factsheetID}
 	 */
-	public SingleResponse update(String indexName, String domain, String factsheet) {
+	public IndexResponse update(String indexName, String domain, String factsheet) {
 		// List<SolrInputDocument> docs =
-		BatchResponse r = composeDoc(domain, factsheet);
+		FactsheetIndexResponse r = composeDoc(domain, factsheet);
 		SolrClient client = new HttpSolrClient("http://hqldvfigis2:8983/solr/factsheet");
-		try {
-			for (SolrInputDocument solrInputDocument : r.getSolrInputDocumentList()) {
+		IndexResponse s = new IndexResponse();
+		s.setMessageList(new ArrayList<String>());
+		s.setOperationStatus(IndexResponse.OperationStatus.SUCCEEDED);
+		boolean perfect = true;
+		for (SolrInputDocument solrInputDocument : r.getSolrInputDocumentList()) {
+			try {
 				client.add(solrInputDocument);
 				client.commit();
+			} catch (IOException | SolrServerException e) {
+				s.getMessageList().add(e.getMessage());
+				s.setOperationStatus(IndexResponse.OperationStatus.PARTLY_SUCCEEDED);
+				perfect = false;
 			}
-		} catch (IOException | SolrServerException e) {
-			log.error(e.getMessage());
-			throw new FigisSearchException(e);
 		}
-		SingleResponse s = new SingleResponse();
-		s.setOperationStatus(SingleResponse.OperationStatus.SUCCEEDED);
+		try {
+			client.close();
+		} catch (IOException e) {
+			s.getMessageList().add(e.getMessage());
+			s.setOperationStatus(IndexResponse.OperationStatus.PARTLY_SUCCEEDED);
+			perfect = false;
+		}
+		if (perfect) {
+			s.setOperationStatus(IndexResponse.OperationStatus.SUCCEEDED);
+		}
 		return s;
 	}
 
-	private BatchResponse composeDoc(String domain, String factsheet) {
+	private FactsheetIndexResponse composeDoc(String domain, String factsheet) {
 		FactsheetDomain d = FactsheetDomain.parseDomain(domain);
 		LanguageList ll = fc.retrieveLanguageListInDomain4ThisFactsheet(d, factsheet);
 		List<SolrInputDocument> solrInputDocuments = new ArrayList<SolrInputDocument>();
-		BatchResponse r = new BatchResponse(new ArrayList<SolrInputDocument>());
+		FactsheetIndexResponse r = new FactsheetIndexResponse(new ArrayList<SolrInputDocument>());
 		r.setMessageList(new ArrayList<String>());
 		r.setOperationStatus(OperationStatus.SUCCEEDED);
 
