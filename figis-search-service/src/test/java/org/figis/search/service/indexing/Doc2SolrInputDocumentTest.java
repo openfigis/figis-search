@@ -5,6 +5,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.fail;
 
 import java.io.File;
+import java.util.List;
 
 import javax.xml.transform.Source;
 import javax.xml.transform.TransformerException;
@@ -29,6 +30,10 @@ public class Doc2SolrInputDocumentTest {
 		SolrInputDocument s = d.extract(loadXML()).basedOn(domain);
 		assertEquals(17, s.getFieldNames().size(), 2);
 
+		@SuppressWarnings("unchecked")
+		List<String> names = (List<String>) s.getField("name").getValue();
+		assertEquals(names.size(), 2);
+
 		for (String fieldName : s.getFieldNames()) {
 			// System.out.println(fieldName);
 			assertFalse(StringUtils.isEmpty(fieldName));
@@ -37,7 +42,6 @@ public class Doc2SolrInputDocumentTest {
 	}
 
 	public static Document loadXML() {
-
 		Source source = new StreamSource(new File("src/test/resources/resource-10529-en.xml"));
 		DOMResult result = new DOMResult();
 		try {
@@ -46,6 +50,9 @@ public class Doc2SolrInputDocumentTest {
 			fail();
 		}
 		return (Document) result.getNode();
+		// FactsheetWebServiceClient fc = new FactsheetWebServiceClient("http://www.fao.org/figis/ws/factsheets/");
+		// Document doc = fc.retrieveFactsheet("10529", FactsheetDomain.resource, FactsheetLanguage.en);
+		// return doc;
 	}
 
 }

@@ -22,14 +22,16 @@ public class IndexServiceTest {
 
 	@Test
 	public void testUpdate() {
-		String factsheetID = "10382";
+
+		// String factsheetID = "10382";
+		String factsheetID = "10529";
 		assertNotNull(indexService);
 		SingleResponse s = indexService.update(indexName, domain, factsheetID);
 		assertEquals(SingleResponse.OperationStatus.SUCCEEDED, s.getOperationStatus());
 		assertNull(s.getMessageList());
 	}
 
-	// @Test
+	@Test
 	public void testUpdateDomain() {
 		assertNotNull(indexService);
 		indexService.update(indexName, domain);
