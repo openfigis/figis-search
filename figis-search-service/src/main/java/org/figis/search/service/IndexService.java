@@ -112,7 +112,7 @@ public class IndexService {
 
 				SolrInputDocument sd = prepare.extract(doc).basedOn(domain);
 				sd.addField("id", u.domain(domain).factsheet(factsheet).lang(language.toString()).compose());
-				sd.addField("dataset", "firms");
+				sd.addField("provenance", "firms");
 				sd.addField("language", language.toString());
 				sd.addField("url", factsheetUrlComposer.composeFromDomainAndFactsheet(disc).replace("/xml", ""));
 				r.getSolrInputDocumentList().add(sd);

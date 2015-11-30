@@ -17,7 +17,8 @@ public class IndexServiceTest {
 	IndexService indexService;
 
 	String indexName = FigisSearchCore.FACTSHEET;
-	String domain = "resource";
+	String r = "resource";
+	String f = "fishery";
 
 	@Test
 	public void testUpdate() {
@@ -25,25 +26,34 @@ public class IndexServiceTest {
 		// String factsheetID = "10382";
 		String factsheetID = "10529";
 		assertNotNull(indexService);
-		IndexResponse s = indexService.update(indexName, domain, factsheetID);
+		IndexResponse s = indexService.update(indexName, r, factsheetID);
 
 		printStatus(s);
 		assertEquals(IndexResponse.OperationStatus.SUCCEEDED, s.getOperationStatus());
 		assertEquals(0, s.getMessageList().size());
 	}
 
-	@Test
-	public void testUpdateDomain() {
+	// @Test
+	public void testUpdateDomainResource() {
+		IndexResponse s = indexService.update(indexName, r);
+		printStatus(s);
+	}
+
+	// @Test
+	public void testUpdateDomainFishery() {
 		assertNotNull(indexService);
-		IndexResponse s = indexService.update(indexName, domain);
+		IndexResponse s = indexService.update(indexName, f);
 		printStatus(s);
 	}
 
 	void printStatus(IndexResponse s) {
+		System.out.println("status");
 		System.out.println(s.getOperationStatus());
+		System.out.println("messages");
 		for (String message : s.getMessageList()) {
 			System.out.println(message);
 		}
+		System.out.println("end messages");
 	}
 
 }
