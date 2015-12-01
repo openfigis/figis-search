@@ -5,6 +5,7 @@ package org.figis.search.web.resource;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
+import javax.servlet.ServletContext;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -34,6 +35,8 @@ public class IndexResource {
 
 	@Inject
 	private IndexService service;
+	@Inject
+	private ServletContext context;
 
 	@GET
 	@Path("/{index}/action/{action}/domain/{domain}")
