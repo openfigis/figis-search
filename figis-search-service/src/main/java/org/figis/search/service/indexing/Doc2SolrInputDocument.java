@@ -75,21 +75,13 @@ public class Doc2SolrInputDocument {
 							expr = expr + " [" + e.getAttrSetting() + "]";
 						}
 					}
-
 					if (expr.contains("null") || StringUtils.isEmpty(expr)) {
 						throw new FigisSearchException(
 								"Some null values are not anticipated, key = " + key + "; Expr = " + expr);
 					}
-					System.out.println(expr);
-					if (expr.equals("/fi:FIGISDoc/fi:AqRes/fi:AqResIdent/dc:Title")) {
-						System.out.println(expr);
-					}
-
 					String value = fp.xpathSingleValue(x, expr, document);
-					System.out.println(value);
 					// post condition
 					if (!StringUtils.isEmpty(value)) {
-						System.out.println(k.getName() + " - " + value);
 						s.addField(k.getName(), value);
 					}
 				}
