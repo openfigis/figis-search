@@ -3,6 +3,7 @@
  */
 package org.figis.search.web.config;
 
+import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.inject.Produces;
 import javax.inject.Singleton;
 import javax.servlet.ServletContext;
@@ -13,7 +14,7 @@ import javax.ws.rs.core.Context;
  * @author Erik van Ingen
  *
  */
-// @ApplicationScoped
+@ApplicationScoped
 public class ConfigurationProducer {
 
 	@Context
