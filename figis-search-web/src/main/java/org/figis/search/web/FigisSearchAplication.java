@@ -21,7 +21,7 @@ import com.wordnik.swagger.jaxrs.config.BeanConfig;
 import lombok.extern.slf4j.Slf4j;
 
 /**
- * The former web.xml for the figis-search-web application
+ * The web.xml for the figis-search-web application in Java code
  * 
  * @author Erik van Ingen
  *
