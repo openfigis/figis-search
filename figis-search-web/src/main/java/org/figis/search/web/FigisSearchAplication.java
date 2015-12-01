@@ -40,7 +40,6 @@ public class FigisSearchAplication extends ResourceConfig {
 
 		register(new CorsFilter());
 		register(new GenericExceptionMapper());
-		register(new org.jboss.weld.environment.servlet.Listener());
 	}
 
 	@PostConstruct
