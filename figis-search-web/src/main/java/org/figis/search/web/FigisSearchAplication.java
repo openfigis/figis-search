@@ -8,12 +8,12 @@ import java.net.URL;
 
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
-import javax.servlet.ServletContext;
 import javax.ws.rs.ApplicationPath;
 
 import org.figis.search.config.ref.FigisSearchException;
 import org.figis.search.util.CorsFilter;
 import org.figis.search.util.GenericExceptionMapper;
+import org.figis.search.web.config.FigisSearchWebConfiguration;
 import org.glassfish.jersey.server.ResourceConfig;
 
 import com.wordnik.swagger.jaxrs.config.BeanConfig;
@@ -31,7 +31,7 @@ import lombok.extern.slf4j.Slf4j;
 public class FigisSearchAplication extends ResourceConfig {
 
 	@Inject
-	private ServletContext context;
+	public FigisSearchWebConfiguration figisSearchWebConfiguration;
 
 	public FigisSearchAplication() {
 
@@ -45,15 +45,10 @@ public class FigisSearchAplication extends ResourceConfig {
 
 	@PostConstruct
 	private void buildBeanConfig() {
-		// URL restUrl = configuration.getFigisSearchUrl();
-
-		System.out.println("=======================================================================");
-		System.out.println(context.getInitParameter("erik"));
-		System.out.println("=======================================================================");
 
 		URL restUrl = null;
 		try {
-			restUrl = new URL(context.getInitParameter("figis-search-rest-url"));
+			restUrl = new URL(figisSearchWebConfiguration.getFigisRestUrl());
 		} catch (MalformedURLException e) {
 			log.error("Missing figis.search url in configuration, swagger will be not available");
 			throw new FigisSearchException(e);
