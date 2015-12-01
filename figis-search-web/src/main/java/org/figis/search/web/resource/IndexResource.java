@@ -44,25 +44,45 @@ public class IndexResource {
 	 * @return
 	 */
 	@GET
-	@Path("{action}/index/{index}/domain/{domain}")
+	@Path("/test")
+	@Produces(MediaType.APPLICATION_JSON)
+	public String updateDomain() {
+		return "you got me going";
+	}
+
+	/**
+	 * /{action}/index/{indexName}/domain/{factsheet domain}
+	 * 
+	 * 
+	 * @param index
+	 * @param domain
+	 * @return
+	 */
+	@GET
+	@Path("/{index}/action/{action}/domain/{domain}")
 	@Produces(MediaType.APPLICATION_JSON)
 	@ApiOperation(value = "Work on the index api", response = IndexResponse.class)
-	public IndexResponse updateDomain(@PathParam("action") @ApiParam(value = "action", required = true) String action,
+	public IndexResponse updateDomain(
 			@PathParam("index") @ApiParam(value = "the name of the index", required = true) String index,
+			@PathParam("action") @ApiParam(value = "action", required = true) String action,
 			@PathParam("domain") @ApiParam(value = "the factsheet domain", required = true) String domain) {
 
-		return service.update(index, domain);
+		return new IndexResponse();
+
+		// return service.update(index, domain);
 	}
 
 	@GET
-	@Path("{action}/index/{index}/domain/{domain}/factsheet/{factsheet}")
+	@Path("/{index}/action/{action}/domain/{domain}/factsheet/{factsheet}")
 	@Produces(MediaType.APPLICATION_JSON)
 	@ApiOperation(value = "Work on the index api", response = IndexResponse.class)
 	public IndexResponse updateFactsheet(
-			@PathParam("action") @ApiParam(value = "action", required = true) String action,
 			@PathParam("index") @ApiParam(value = "the name of the index", required = true) String index,
+			@PathParam("action") @ApiParam(value = "action", required = true) String action,
 			@PathParam("domain") @ApiParam(value = "the factsheet domain", required = true) String domain,
 			@PathParam("factsheet") @ApiParam(value = "the factsheet", required = true) String factsheet) {
+
+		System.out.println("fiets");
 
 		return service.update(index, domain, factsheet);
 	}

@@ -33,13 +33,13 @@ public class IndexServiceTest {
 		assertEquals(0, s.getMessageList().size());
 	}
 
-	@Test
+	// @Test
 	public void testUpdateDomainResource() {
 		IndexResponse s = indexService.update(indexName, r);
 		printStatus(s);
 	}
 
-	@Test
+	// @Test
 	public void testUpdateDomainFishery() {
 		assertNotNull(indexService);
 		IndexResponse s = indexService.update(indexName, f);
