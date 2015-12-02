@@ -4,6 +4,7 @@ import javax.xml.xpath.XPath;
 
 import org.apache.solr.common.SolrInputDocument;
 import org.apache.solr.common.StringUtils;
+import org.fao.fi.factsheetwebservice.domain.FactsheetDomain;
 import org.figis.search.config.ref.FigisSearchException;
 import org.figis.search.xmlsearchenginecontrol.Element;
 import org.figis.search.xmlsearchenginecontrol.KeyWord;
@@ -41,7 +42,7 @@ public class Doc2SolrInputDocument {
 	 * @param domain
 	 * @return
 	 */
-	public SolrInputDocument basedOn(String domain) {
+	public SolrInputDocument basedOn(FactsheetDomain domain) {
 		if (document == null) {
 			new FigisSearchException("First use the extract method");
 		}

@@ -16,6 +16,7 @@ import javax.xml.transform.stream.StreamSource;
 
 import org.apache.solr.common.SolrInputDocument;
 import org.apache.solr.common.StringUtils;
+import org.fao.fi.factsheetwebservice.domain.FactsheetDomain;
 import org.junit.Test;
 import org.w3c.dom.Document;
 
@@ -23,7 +24,7 @@ public class Doc2SolrInputDocumentTest {
 
 	Doc2SolrInputDocument d = new Doc2SolrInputDocument();
 
-	String domain = "resource";
+	FactsheetDomain domain = FactsheetDomain.resource;
 
 	@Test
 	public void testExtract() {

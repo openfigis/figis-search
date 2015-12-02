@@ -17,6 +17,7 @@ import org.fao.fi.services.factsheet.client.FactsheetClientException;
 import org.fao.fi.services.factsheet.client.FactsheetWebServiceClient;
 import org.fao.fi.services.factsheet.logic.FactsheetUrlComposer;
 import org.fao.fi.services.factsheet.logic.FactsheetUrlComposerImpl;
+import org.figis.search.config.elements.Index;
 import org.figis.search.service.IndexResponse.OperationStatus;
 import org.figis.search.service.indexing.Doc2SolrInputDocument;
 import org.figis.search.service.util.FactsheetId;
@@ -40,9 +41,9 @@ public class IndexService {
 	 * update or delete index of a single factsheet /{action}/index/{indexName}/domain/{factsheet
 	 * domain}/factsheet/{factsheetID}
 	 */
-	public IndexResponse update(String indexName, String domain) {
-		FactsheetDomain d = FactsheetDomain.parseDomain(domain);
-		FactsheetList l = fc.retrieveFactsheetListPerDomain(d);
+	public IndexResponse update(Index indexName, FactsheetDomain domain) {
+
+		FactsheetList l = fc.retrieveFactsheetListPerDomain(domain);
 		IndexResponse domainIndexResponse = new IndexResponse();
 		domainIndexResponse.setMessageList(new ArrayList<String>());
 		boolean perfect = true;
@@ -55,17 +56,20 @@ public class IndexService {
 				perfect = false;
 			}
 		}
-		if (perfect) {
+		if (perfect)
+
+		{
 			domainIndexResponse.setOperationStatus(IndexResponse.OperationStatus.SUCCEEDED);
 		}
 		return domainIndexResponse;
+
 	}
 
 	/**
 	 * update or delete index of a single factsheet /{action}/index/{indexName}/domain/{factsheet
 	 * domain}/factsheet/{factsheetID}
 	 */
-	public IndexResponse update(String indexName, String domain, String factsheet) {
+	public IndexResponse update(Index indexName, FactsheetDomain domain, String factsheet) {
 		// List<SolrInputDocument> docs =
 		FactsheetIndexResponse r = composeDoc(domain, factsheet);
 		SolrClient client = new HttpSolrClient("http://hqldvfigis2:8983/solr/factsheet");
@@ -96,9 +100,9 @@ public class IndexService {
 		return s;
 	}
 
-	private FactsheetIndexResponse composeDoc(String domain, String factsheet) {
-		FactsheetDomain d = FactsheetDomain.parseDomain(domain);
-		LanguageList ll = fc.retrieveLanguageListInDomain4ThisFactsheet(d, factsheet);
+	private FactsheetIndexResponse composeDoc(FactsheetDomain domain, String factsheet) {
+
+		LanguageList ll = fc.retrieveLanguageListInDomain4ThisFactsheet(domain, factsheet);
 		List<SolrInputDocument> solrInputDocuments = new ArrayList<SolrInputDocument>();
 		FactsheetIndexResponse r = new FactsheetIndexResponse(new ArrayList<SolrInputDocument>());
 		r.setMessageList(new ArrayList<String>());
@@ -106,9 +110,9 @@ public class IndexService {
 
 		for (FactsheetLanguage language : ll.getLanguageList()) {
 			try {
-				Document doc = fc.retrieveFactsheet(factsheet, d, language);
+				Document doc = fc.retrieveFactsheet(factsheet, domain, language);
 				// Document doc = loadXML();
-				FactsheetDiscriminator disc = new FactsheetDiscriminator(language, d, factsheet);
+				FactsheetDiscriminator disc = new FactsheetDiscriminator(language, domain, factsheet);
 
 				SolrInputDocument sd = prepare.extract(doc).basedOn(domain);
 				sd.addField("id", u.domain(domain).factsheet(factsheet).lang(language.toString()).compose());
@@ -127,12 +131,12 @@ public class IndexService {
 
 	}
 
-	public IndexResponse delete(String index, String domain) {
+	public IndexResponse delete(Index index, FactsheetDomain domain) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public IndexResponse delete(String index, String domain, String factsheet) {
+	public IndexResponse delete(Index index, FactsheetDomain domain, String factsheet) {
 		// TODO Auto-generated method stub
 		return null;
 	}

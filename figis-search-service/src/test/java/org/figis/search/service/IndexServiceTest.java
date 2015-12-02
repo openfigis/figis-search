@@ -5,7 +5,8 @@ import static org.junit.Assert.assertNotNull;
 
 import javax.inject.Inject;
 
-import org.figis.search.config.ref.FigisSearchCore;
+import org.fao.fi.factsheetwebservice.domain.FactsheetDomain;
+import org.figis.search.config.elements.Index;
 import org.jglue.cdiunit.CdiRunner;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -16,9 +17,9 @@ public class IndexServiceTest {
 	@Inject
 	IndexService indexService;
 
-	String indexName = FigisSearchCore.FACTSHEET;
-	String r = "resource";
-	String f = "fishery";
+	Index indexName = Index.factsheet;
+	FactsheetDomain r = FactsheetDomain.resource;
+	FactsheetDomain f = FactsheetDomain.fishery;
 
 	@Test
 	public void testUpdate() {

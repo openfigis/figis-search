@@ -1,4 +1,4 @@
-package org.figis.search.config.ref;
+package org.figis.search.config.elements;
 
 /**
  * 
@@ -8,16 +8,10 @@ package org.figis.search.config.ref;
  * @author Erik van Ingen
  *
  */
-public class FigisSearchCore {
-
+public enum Index {
 	/**
 	 * factsheet contains the domains as listed in http://www.fao.org/figis/ws/factsheets/domain/
 	 */
-	public static final String FACTSHEET = "factsheet";
-
-	/**
-	 * 
-	 */
-	public static final String REFPUB = "refpub";
+	factsheet, refpub;
 
 }

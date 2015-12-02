@@ -8,6 +8,6 @@ package org.figis.search.web.resource;
  */
 public enum Action {
 
-	update, delete
+	update, delete, unknown;
 
 }
