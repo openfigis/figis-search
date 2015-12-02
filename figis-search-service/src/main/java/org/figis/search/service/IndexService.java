@@ -123,6 +123,7 @@ public class IndexService {
 				sd.addField("provenance", "firms");
 				// sd.addField("domain", domain);
 				sd.addField("language", language.toString());
+				sd.addField("figisid", factsheet);
 				sd.addField("url", factsheetUrlComposer.composeFromDomainAndFactsheet(disc).replace("/xml", ""));
 				r.getSolrInputDocumentList().add(sd);
 				solrInputDocuments.add(sd);
