@@ -58,6 +58,15 @@ public class IndexResource {
 		}
 	}
 
+	/**
+	 * 
+	 * @param index
+	 * @param action
+	 * @param domain
+	 * @param factsheet
+	 * @return
+	 */
+
 	@GET
 	@Path("/{index}/action/{action}/domain/{domain}/factsheet/{factsheet}")
 	@Produces(MediaType.APPLICATION_JSON)
