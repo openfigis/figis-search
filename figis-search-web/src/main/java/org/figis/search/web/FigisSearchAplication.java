@@ -35,6 +35,7 @@ public class FigisSearchAplication extends ResourceConfig {
 
 	public FigisSearchAplication() {
 
+		packages("org.figis.search.web.config");
 		packages("org.figis.search.web.resource");
 		packages("com.wordnik.swagger.jaxrs.listing");
 

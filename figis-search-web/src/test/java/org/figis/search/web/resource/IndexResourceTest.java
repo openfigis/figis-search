@@ -12,6 +12,9 @@ import org.figis.search.service.Action;
 import org.figis.search.service.IndexResponse;
 import org.figis.search.service.IndexResponse.OperationStatus;
 import org.figis.search.service.IndexService;
+import org.figis.search.service.config.FigisSearchServiceConfigurationProducer;
+import org.figis.search.web.config.FigisSearchWebConfigurationProducer;
+import org.jglue.cdiunit.AdditionalClasses;
 import org.jglue.cdiunit.CdiRunner;
 import org.jglue.cdiunit.ProducesAlternative;
 import org.junit.Test;
@@ -19,10 +22,14 @@ import org.junit.runner.RunWith;
 import org.mockito.Mockito;
 
 @RunWith(CdiRunner.class)
+@AdditionalClasses({ FigisSearchWebConfigurationProducer.class, FigisSearchServiceConfigurationProducer.class })
 public class IndexResourceTest {
 
 	@Inject
 	IndexResource indexResource;
+
+	// @Inject
+	// FigisSearchWebConfiguration figisSearchWebConfiguration;
 
 	Action update = Action.update;
 	Action delete = Action.delete;
@@ -67,5 +74,13 @@ public class IndexResourceTest {
 		when(s.deleteFactsheet(index, domain, factsheet)).thenReturn(r);
 		return s;
 	}
+
+	// @Produces
+	// public FigisSearchServiceConfiguration buildConfiguration() {
+	// FigisSearchServiceConfiguration c = new FigisSearchServiceConfiguration();
+	// c.setFactsheetWebservcieEndPoint("http://figisapps.fao.org/figis/ws/factsheets/");
+	// c.setHttpSolrEndPoint("http://hqldvfigis2:8983/solr/factsheet");
+	// return c;
+	// }
 
 }

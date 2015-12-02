@@ -1,12 +1,13 @@
 package org.figis.search.web.config;
 
-import javax.enterprise.inject.Alternative;
+import javax.enterprise.inject.Vetoed;
 
 import lombok.Data;
 
 @Data
-@Alternative
+@Vetoed
 public class FigisSearchWebConfiguration {
 
 	private String figisRestUrl;
+
 }

@@ -16,7 +16,7 @@ public class LocalJaxRsProducers {
 	@JaxRsQualifier
 	public ServletContext getServletContext() {
 		ServletContext servletContext = mock(ServletContext.class);
-		when(servletContext.getInitParameter(ConfigurationProducer.FIGIS_SEARCH_REST_URL)).thenReturn(URL);
+		when(servletContext.getInitParameter(FigisSearchWebConfigurationProducer.FIGIS_SEARCH_REST_URL)).thenReturn(URL);
 		return servletContext;
 	}
 }

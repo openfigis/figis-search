@@ -4,9 +4,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Inject;
+
 import org.apache.solr.client.solrj.SolrClient;
 import org.apache.solr.client.solrj.SolrServerException;
-import org.apache.solr.client.solrj.impl.HttpSolrClient;
 import org.apache.solr.common.SolrInputDocument;
 import org.fao.fi.factsheetwebservice.domain.FactsheetDiscriminator;
 import org.fao.fi.factsheetwebservice.domain.FactsheetDomain;
@@ -20,21 +21,26 @@ import org.fao.fi.services.factsheet.logic.FactsheetUrlComposerImpl;
 import org.figis.search.config.elements.Index;
 import org.figis.search.config.ref.FigisSearchException;
 import org.figis.search.service.IndexResponse.OperationStatus;
+import org.figis.search.service.config.FigisSearchServiceQualifier;
 import org.figis.search.service.indexing.Doc2SolrInputDocument;
 import org.figis.search.service.util.FactsheetId;
 import org.w3c.dom.Document;
 
 public class IndexService {
 
+	@Inject
+	@FigisSearchServiceQualifier
+	private FactsheetWebServiceClient fc;
+
+	@Inject
+	private SolrClient client;
+
 	/**
 	 * This dependency is a short cut. The factsheet webservice needs to be extended with this function
 	 */
-
-	FactsheetUrlComposer factsheetUrlComposer = new FactsheetUrlComposerImpl();
-	FactsheetId u = new FactsheetId();
-	Doc2SolrInputDocument prepare = new Doc2SolrInputDocument();
-	FactsheetWebServiceClient fc = new FactsheetWebServiceClient("http://www.fao.org/figis/ws/factsheets/");
-	SolrClient client = new HttpSolrClient("http://hqldvfigis2:8983/solr/factsheet");
+	private FactsheetUrlComposer factsheetUrlComposer = new FactsheetUrlComposerImpl();
+	private FactsheetId u = new FactsheetId();
+	private Doc2SolrInputDocument prepare = new Doc2SolrInputDocument();
 
 	/**
 	 * update or delete index of a single factsheet /{action}/index/{indexName}/domain/{factsheet
@@ -91,13 +97,6 @@ public class IndexService {
 				s.setOperationStatus(IndexResponse.OperationStatus.PARTLY_SUCCEEDED);
 				perfect = false;
 			}
-		}
-		try {
-			client.close();
-		} catch (IOException e) {
-			s.getMessageList().add(e.getMessage());
-			s.setOperationStatus(IndexResponse.OperationStatus.PARTLY_SUCCEEDED);
-			perfect = false;
 		}
 		if (perfect) {
 			s.setOperationStatus(IndexResponse.OperationStatus.SUCCEEDED);
@@ -161,13 +160,6 @@ public class IndexService {
 				s.setOperationStatus(IndexResponse.OperationStatus.PARTLY_SUCCEEDED);
 				perfect = false;
 			}
-		}
-		try {
-			client.close();
-		} catch (IOException e) {
-			s.getMessageList().add(e.getMessage());
-			s.setOperationStatus(IndexResponse.OperationStatus.PARTLY_SUCCEEDED);
-			perfect = false;
 		}
 		if (perfect) {
 			s.setOperationStatus(IndexResponse.OperationStatus.SUCCEEDED);

@@ -11,8 +11,8 @@ import org.junit.runner.RunWith;
 
 @RunWith(CdiRunner.class)
 @LocalSupportJaxRs
-@AdditionalClasses(ConfigurationProducer.class)
-public class ConfigurationProducerTest {
+@AdditionalClasses(FigisSearchWebConfigurationProducer.class)
+public class FigisSearchWebConfigurationProducerTest {
 
 	@Inject
 	FigisSearchWebConfiguration figisSearchWebConfiguration;
