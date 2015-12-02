@@ -127,6 +127,16 @@ public class IndexService {
 
 	}
 
+	public IndexResponse delete(String index, String domain) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public IndexResponse delete(String index, String domain, String factsheet) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	// public static Document loadXML() {
 	//
 	// Source source = new StreamSource(new File("src/test/resources/resource-10529-en.xml"));
