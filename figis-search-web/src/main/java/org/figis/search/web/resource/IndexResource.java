@@ -47,7 +47,7 @@ public class IndexResource {
 	@Path("/{index}/action/{action}/domain/{domain}")
 	@Produces(MediaType.APPLICATION_JSON)
 	@ApiOperation(value = "Update the index of a specific domain", response = IndexResponse.class)
-	public IndexResponse updateDomain(
+	public IndexResponse actionOnDomain(
 			@PathParam("index") @ApiParam(value = "the name of the index", required = true) Index index,
 			@PathParam("action") @ApiParam(value = "action", required = true) Action action,
 			@PathParam("domain") @ApiParam(value = "the factsheet domain", required = true) FactsheetDomain domain) {
@@ -63,7 +63,7 @@ public class IndexResource {
 	@Path("/{index}/action/{action}/domain/{domain}/factsheet/{factsheet}")
 	@Produces(MediaType.APPLICATION_JSON)
 	@ApiOperation(value = "Update the index of a specific factsheet from a certain domain", response = IndexResponse.class)
-	public IndexResponse updateFactsheet(
+	public IndexResponse actionOnFactsheet(
 			@PathParam("index") @ApiParam(value = "the name of the index", required = true) Index index,
 			@PathParam("action") @ApiParam(value = "action", required = true) Action action,
 			@PathParam("domain") @ApiParam(value = "the factsheet domain", required = true) FactsheetDomain domain,

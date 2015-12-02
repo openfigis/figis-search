@@ -31,25 +31,25 @@ public class IndexResourceTest {
 
 	// @Test
 	public void testActionsOnDomain() {
-		assertEquals(OperationStatus.SUCCEEDED, indexResource.updateDomain(index, update, domain).getOperationStatus());
-		assertEquals(OperationStatus.SUCCEEDED, indexResource.updateDomain(index, delete, domain).getOperationStatus());
-		assertEquals(OperationStatus.FAILED, indexResource.updateDomain(index, null, domain).getOperationStatus());
+		assertEquals(OperationStatus.SUCCEEDED, indexResource.actionOnDomain(index, update, domain).getOperationStatus());
+		assertEquals(OperationStatus.SUCCEEDED, indexResource.actionOnDomain(index, delete, domain).getOperationStatus());
+		assertEquals(OperationStatus.FAILED, indexResource.actionOnDomain(index, null, domain).getOperationStatus());
 	}
 
 	@Test
 	public void testActionsOnFactsheet() {
 		assertEquals(OperationStatus.SUCCEEDED,
-				indexResource.updateFactsheet(index, update, domain, factsheet).getOperationStatus());
+				indexResource.actionOnFactsheet(index, update, domain, factsheet).getOperationStatus());
 		assertEquals(OperationStatus.SUCCEEDED,
-				indexResource.updateFactsheet(index, delete, domain, factsheet).getOperationStatus());
+				indexResource.actionOnFactsheet(index, delete, domain, factsheet).getOperationStatus());
 		assertEquals(OperationStatus.FAILED,
-				indexResource.updateFactsheet(null, update, domain, factsheet).getOperationStatus());
+				indexResource.actionOnFactsheet(null, update, domain, factsheet).getOperationStatus());
 		assertEquals(OperationStatus.FAILED,
-				indexResource.updateFactsheet(index, null, domain, factsheet).getOperationStatus());
+				indexResource.actionOnFactsheet(index, null, domain, factsheet).getOperationStatus());
 		assertEquals(OperationStatus.FAILED,
-				indexResource.updateFactsheet(index, delete, null, factsheet).getOperationStatus());
+				indexResource.actionOnFactsheet(index, delete, null, factsheet).getOperationStatus());
 		assertEquals(OperationStatus.FAILED,
-				indexResource.updateFactsheet(index, delete, domain, null).getOperationStatus());
+				indexResource.actionOnFactsheet(index, delete, domain, null).getOperationStatus());
 	}
 
 	@Produces
