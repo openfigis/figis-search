@@ -18,14 +18,12 @@ import org.fao.fi.services.factsheet.client.FactsheetWebServiceClient;
 import org.fao.fi.services.factsheet.logic.FactsheetUrlComposer;
 import org.fao.fi.services.factsheet.logic.FactsheetUrlComposerImpl;
 import org.figis.search.config.elements.Index;
+import org.figis.search.config.ref.FigisSearchException;
 import org.figis.search.service.IndexResponse.OperationStatus;
 import org.figis.search.service.indexing.Doc2SolrInputDocument;
 import org.figis.search.service.util.FactsheetId;
 import org.w3c.dom.Document;
 
-import lombok.extern.slf4j.Slf4j;
-
-@Slf4j
 public class IndexService {
 
 	/**
@@ -36,19 +34,30 @@ public class IndexService {
 	FactsheetId u = new FactsheetId();
 	Doc2SolrInputDocument prepare = new Doc2SolrInputDocument();
 	FactsheetWebServiceClient fc = new FactsheetWebServiceClient("http://www.fao.org/figis/ws/factsheets/");
+	SolrClient client = new HttpSolrClient("http://hqldvfigis2:8983/solr/factsheet");
 
 	/**
 	 * update or delete index of a single factsheet /{action}/index/{indexName}/domain/{factsheet
 	 * domain}/factsheet/{factsheetID}
 	 */
-	public IndexResponse update(Index indexName, FactsheetDomain domain) {
-
+	public IndexResponse actionOnDomain(Action action, Index indexName, FactsheetDomain domain) {
 		FactsheetList l = fc.retrieveFactsheetListPerDomain(domain);
 		IndexResponse domainIndexResponse = new IndexResponse();
 		domainIndexResponse.setMessageList(new ArrayList<String>());
 		boolean perfect = true;
 		for (FactsheetDiscriminator ds : l.getFactsheetList()) {
-			IndexResponse singleFactsheetResponse = update(indexName, domain, ds.getFactsheet());
+			IndexResponse singleFactsheetResponse = null;
+			switch (action) {
+			case update:
+				singleFactsheetResponse = updateFactsheet(indexName, domain, ds.getFactsheet());
+				break;
+			case delete:
+				singleFactsheetResponse = deleteFactsheet(indexName, domain, ds.getFactsheet());
+				break;
+			case unknown:
+			default:
+				throw new FigisSearchException(Action.unknown.name());
+			}
 			domainIndexResponse.getMessageList().addAll(singleFactsheetResponse.getMessageList());
 			if (singleFactsheetResponse.getOperationStatus().equals(IndexResponse.OperationStatus.PARTLY_SUCCEEDED)
 					|| singleFactsheetResponse.getOperationStatus().equals(IndexResponse.OperationStatus.FAILED)) {
@@ -56,9 +65,7 @@ public class IndexService {
 				perfect = false;
 			}
 		}
-		if (perfect)
-
-		{
+		if (perfect) {
 			domainIndexResponse.setOperationStatus(IndexResponse.OperationStatus.SUCCEEDED);
 		}
 		return domainIndexResponse;
@@ -69,10 +76,8 @@ public class IndexService {
 	 * update or delete index of a single factsheet /{action}/index/{indexName}/domain/{factsheet
 	 * domain}/factsheet/{factsheetID}
 	 */
-	public IndexResponse update(Index indexName, FactsheetDomain domain, String factsheet) {
-		// List<SolrInputDocument> docs =
+	public IndexResponse updateFactsheet(Index indexName, FactsheetDomain domain, String factsheet) {
 		FactsheetIndexResponse r = composeDoc(domain, factsheet);
-		SolrClient client = new HttpSolrClient("http://hqldvfigis2:8983/solr/factsheet");
 		IndexResponse s = new IndexResponse();
 		s.setMessageList(new ArrayList<String>());
 		s.setOperationStatus(IndexResponse.OperationStatus.SUCCEEDED);
@@ -131,26 +136,44 @@ public class IndexService {
 
 	}
 
-	public IndexResponse delete(Index index, FactsheetDomain domain) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	/**
+	 * Delete tries to delete all possible language objects for that factsheet object. Possible languages are defined
+	 * in: @FactsheetLanguage
+	 * 
+	 * 
+	 * @param action
+	 * @param index
+	 * @param domain
+	 * @param factsheet
+	 * @return
+	 */
+	public IndexResponse deleteFactsheet(Index index, FactsheetDomain domain, String factsheet) {
+		IndexResponse s = new IndexResponse();
+		s.setMessageList(new ArrayList<String>());
+		s.setOperationStatus(IndexResponse.OperationStatus.SUCCEEDED);
+		boolean perfect = true;
+		for (FactsheetLanguage language : FactsheetLanguage.values()) {
+			try {
+				client.deleteById(u.domain(domain).factsheet(factsheet).lang(language.toString()).compose());
+				client.commit();
+			} catch (IOException | SolrServerException e) {
+				s.getMessageList().add(e.getMessage());
+				s.setOperationStatus(IndexResponse.OperationStatus.PARTLY_SUCCEEDED);
+				perfect = false;
+			}
+		}
+		try {
+			client.close();
+		} catch (IOException e) {
+			s.getMessageList().add(e.getMessage());
+			s.setOperationStatus(IndexResponse.OperationStatus.PARTLY_SUCCEEDED);
+			perfect = false;
+		}
+		if (perfect) {
+			s.setOperationStatus(IndexResponse.OperationStatus.SUCCEEDED);
+		}
+		return s;
 
-	public IndexResponse delete(Index index, FactsheetDomain domain, String factsheet) {
-		// TODO Auto-generated method stub
-		return null;
 	}
-
-	// public static Document loadXML() {
-	//
-	// Source source = new StreamSource(new File("src/test/resources/resource-10529-en.xml"));
-	// DOMResult result = new DOMResult();
-	// try {
-	// TransformerFactory.newInstance().newTransformer().transform(source, result);
-	// } catch (TransformerException | TransformerFactoryConfigurationError e) {
-	// fail();
-	// }
-	// return (Document) result.getNode();
-	// }
 
 }

@@ -25,7 +25,7 @@ public class FactsheetId {
 		return this;
 	}
 
-	public Object compose() {
+	public String compose() {
 		if (domain == null || StringUtils.isEmpty(factsheet) || StringUtils.isEmpty(lang)) {
 			throw new FigisSearchException("All domain, factsheet and lang must be filled");
 		}

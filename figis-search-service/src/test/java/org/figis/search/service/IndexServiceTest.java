@@ -20,30 +20,38 @@ public class IndexServiceTest {
 	Index indexName = Index.factsheet;
 	FactsheetDomain r = FactsheetDomain.resource;
 	FactsheetDomain f = FactsheetDomain.fishery;
+	String factsheetID = "10529";
 
 	@Test
-	public void testUpdate() {
+	public void testUpdateFactsheet() {
 
-		// String factsheetID = "10382";
-		String factsheetID = "10529";
 		assertNotNull(indexService);
-		IndexResponse s = indexService.update(indexName, r, factsheetID);
+		IndexResponse s = indexService.updateFactsheet(indexName, r, factsheetID);
 
 		printStatus(s);
 		assertEquals(IndexResponse.OperationStatus.SUCCEEDED, s.getOperationStatus());
 		assertEquals(0, s.getMessageList().size());
 	}
 
+	@Test
+	public void testDeleteFactsheet() {
+		assertNotNull(indexService);
+		IndexResponse s = indexService.deleteFactsheet(indexName, r, factsheetID);
+
+		assertEquals(IndexResponse.OperationStatus.SUCCEEDED, s.getOperationStatus());
+		assertEquals(0, s.getMessageList().size());
+	}
+
 	// @Test
-	public void testUpdateDomainResource() {
-		IndexResponse s = indexService.update(indexName, r);
+	public void testActionOnDomainResource() {
+		IndexResponse s = indexService.actionOnDomain(Action.update, indexName, r);
 		printStatus(s);
 	}
 
 	// @Test
-	public void testUpdateDomainFishery() {
+	public void testActionOnDomainFishery() {
 		assertNotNull(indexService);
-		IndexResponse s = indexService.update(indexName, f);
+		IndexResponse s = indexService.actionOnDomain(Action.update, indexName, f);
 		printStatus(s);
 	}
 

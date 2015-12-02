@@ -1,4 +1,4 @@
-package org.figis.search.web.resource;
+package org.figis.search.service;
 
 /**
  * Possible actions on an index.

@@ -47,7 +47,8 @@ public class Doc2SolrInputDocument {
 			new FigisSearchException("First use the extract method");
 		}
 		XmlSearchEngineControl c = new FigisSearchJaxb().unmarshall();
-		ObjectType o = c.getObjectTypeList().stream().filter(w -> w.getName().equals(domain)).findFirst().get();
+		ObjectType o = c.getObjectTypeList().stream().filter(w -> w.getName().equals(domain.toString())).findFirst()
+				.get();
 		XPath x = fp.getXpath();
 		SolrInputDocument s = new SolrInputDocument();
 		s.setField("domain", o.getName());

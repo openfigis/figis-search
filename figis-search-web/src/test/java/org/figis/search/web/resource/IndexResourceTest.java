@@ -8,6 +8,7 @@ import javax.inject.Inject;
 
 import org.fao.fi.factsheetwebservice.domain.FactsheetDomain;
 import org.figis.search.config.elements.Index;
+import org.figis.search.service.Action;
 import org.figis.search.service.IndexResponse;
 import org.figis.search.service.IndexResponse.OperationStatus;
 import org.figis.search.service.IndexService;
@@ -29,10 +30,12 @@ public class IndexResourceTest {
 	FactsheetDomain domain = FactsheetDomain.resource;
 	String factsheet = "10529";
 
-	// @Test
+	@Test
 	public void testActionsOnDomain() {
-		assertEquals(OperationStatus.SUCCEEDED, indexResource.actionOnDomain(index, update, domain).getOperationStatus());
-		assertEquals(OperationStatus.SUCCEEDED, indexResource.actionOnDomain(index, delete, domain).getOperationStatus());
+		assertEquals(OperationStatus.SUCCEEDED,
+				indexResource.actionOnDomain(index, update, domain).getOperationStatus());
+		assertEquals(OperationStatus.SUCCEEDED,
+				indexResource.actionOnDomain(index, delete, domain).getOperationStatus());
 		assertEquals(OperationStatus.FAILED, indexResource.actionOnDomain(index, null, domain).getOperationStatus());
 	}
 
@@ -58,10 +61,10 @@ public class IndexResourceTest {
 		IndexService s = Mockito.mock(IndexService.class);
 		IndexResponse r = new IndexResponse();
 		r.setOperationStatus(OperationStatus.SUCCEEDED);
-		when(s.update(index, domain, factsheet)).thenReturn(r);
-		when(s.update(index, domain)).thenReturn(r);
-		when(s.delete(index, domain, factsheet)).thenReturn(r);
-		when(s.delete(index, domain)).thenReturn(r);
+		when(s.actionOnDomain(Action.update, index, domain)).thenReturn(r);
+		when(s.actionOnDomain(Action.delete, index, domain)).thenReturn(r);
+		when(s.updateFactsheet(index, domain, factsheet)).thenReturn(r);
+		when(s.deleteFactsheet(index, domain, factsheet)).thenReturn(r);
 		return s;
 	}
 

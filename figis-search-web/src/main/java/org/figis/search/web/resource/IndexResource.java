@@ -18,6 +18,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.fao.fi.factsheetwebservice.domain.FactsheetDomain;
 import org.figis.search.config.elements.Index;
 import org.figis.search.config.ref.FigisSearchException;
+import org.figis.search.service.Action;
 import org.figis.search.service.IndexResponse;
 import org.figis.search.service.IndexResponse.OperationStatus;
 import org.figis.search.service.IndexService;
@@ -55,7 +56,7 @@ public class IndexResource {
 		if (index == null || action == null || domain == null) {
 			return provideFailed();
 		} else {
-			return processAction(action, () -> service.update(index, domain), () -> service.delete(index, domain));
+			return service.actionOnDomain(action, index, domain);
 		}
 	}
 
@@ -72,8 +73,8 @@ public class IndexResource {
 		if (index == null || action == null || domain == null || StringUtils.isBlank(factsheet)) {
 			return provideFailed();
 		} else {
-			return processAction(action, () -> service.update(index, domain, factsheet),
-					() -> service.delete(index, domain, factsheet));
+			return processAction(action, () -> service.updateFactsheet(index, domain, factsheet),
+					() -> service.deleteFactsheet(index, domain, factsheet));
 		}
 	}
 
