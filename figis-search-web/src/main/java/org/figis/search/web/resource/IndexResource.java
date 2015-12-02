@@ -4,7 +4,6 @@
 package org.figis.search.web.resource;
 
 import java.util.ArrayList;
-import java.util.concurrent.Callable;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
@@ -17,7 +16,6 @@ import javax.ws.rs.core.MediaType;
 import org.apache.commons.lang3.StringUtils;
 import org.fao.fi.factsheetwebservice.domain.FactsheetDomain;
 import org.figis.search.config.elements.Index;
-import org.figis.search.config.ref.FigisSearchException;
 import org.figis.search.service.Action;
 import org.figis.search.service.IndexResponse;
 import org.figis.search.service.IndexResponse.OperationStatus;
@@ -69,27 +67,16 @@ public class IndexResource {
 			@PathParam("action") @ApiParam(value = "action", required = true) Action action,
 			@PathParam("domain") @ApiParam(value = "the factsheet domain", required = true) FactsheetDomain domain,
 			@PathParam("factsheet") @ApiParam(value = "the factsheet", required = true) String factsheet) {
-
 		if (index == null || action == null || domain == null || StringUtils.isBlank(factsheet)) {
 			return provideFailed();
 		} else {
-			return processAction(action, () -> service.updateFactsheet(index, domain, factsheet),
-					() -> service.deleteFactsheet(index, domain, factsheet));
-		}
-	}
-
-	private IndexResponse processAction(Action action, Callable<IndexResponse> update, Callable<IndexResponse> delete) {
-		if (action == null) {
-			action = Action.unknown;
-		}
-		try {
 			IndexResponse r;
 			switch (action) {
 			case update:
-				r = update.call();
+				r = service.updateFactsheet(index, domain, factsheet);
 				break;
 			case delete:
-				r = delete.call();
+				r = service.deleteFactsheet(index, domain, factsheet);
 				break;
 			case unknown:
 			default:
@@ -97,8 +84,6 @@ public class IndexResource {
 				break;
 			}
 			return r;
-		} catch (Exception e) {
-			throw new FigisSearchException(e);
 		}
 	}
 
