@@ -30,21 +30,21 @@ public class IndexServiceTest {
 	public void testUpdateFactsheet() {
 
 		assertNotNull(indexService);
-		IndexResponse s = indexService.updateFactsheet(indexName, r, factsheetID);
+		IndexResponse s = indexService.actionOnFactsheet(Action.update, indexName, r, factsheetID);
 
 		printStatus(s);
 		assertEquals(IndexResponse.OperationStatus.SUCCEEDED, s.getOperationStatus());
 		assertEquals(0, s.getMessageList().size());
 
 		// testing repeatability
-		indexService.updateFactsheet(indexName, r, factsheetID);
+		indexService.actionOnFactsheet(Action.update, indexName, r, factsheetID);
 
 	}
 
 	@Test
 	public void testDeleteFactsheet() {
 		assertNotNull(indexService);
-		IndexResponse s = indexService.deleteFactsheet(indexName, r, factsheetID);
+		IndexResponse s = indexService.actionOnFactsheet(Action.delete, indexName, r, factsheetID);
 
 		assertEquals(IndexResponse.OperationStatus.SUCCEEDED, s.getOperationStatus());
 		assertEquals(0, s.getMessageList().size());

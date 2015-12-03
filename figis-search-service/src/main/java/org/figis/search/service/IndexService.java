@@ -78,11 +78,28 @@ public class IndexService {
 
 	}
 
+	public IndexResponse actionOnFactsheet(Action action, Index index, FactsheetDomain domain, String factsheet) {
+		IndexResponse r;
+		switch (action) {
+		case update:
+			r = this.updateFactsheet(index, domain, factsheet);
+			break;
+		case delete:
+			r = this.deleteFactsheet(index, domain, factsheet);
+			break;
+		case unknown:
+		default:
+			r = ProvideFailed.provide();
+			break;
+		}
+		return r;
+	}
+
 	/**
 	 * update or delete index of a single factsheet /{action}/index/{indexName}/domain/{factsheet
 	 * domain}/factsheet/{factsheetID}
 	 */
-	public IndexResponse updateFactsheet(Index indexName, FactsheetDomain domain, String factsheet) {
+	private IndexResponse updateFactsheet(Index indexName, FactsheetDomain domain, String factsheet) {
 		FactsheetIndexResponse r = composeDoc(domain, factsheet);
 		IndexResponse s = new IndexResponse();
 		s.setMessageList(new ArrayList<String>());
@@ -147,7 +164,7 @@ public class IndexService {
 	 * @param factsheet
 	 * @return
 	 */
-	public IndexResponse deleteFactsheet(Index index, FactsheetDomain domain, String factsheet) {
+	private IndexResponse deleteFactsheet(Index index, FactsheetDomain domain, String factsheet) {
 		IndexResponse s = new IndexResponse();
 		s.setMessageList(new ArrayList<String>());
 		s.setOperationStatus(IndexResponse.OperationStatus.SUCCEEDED);

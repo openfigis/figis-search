@@ -3,8 +3,6 @@
  */
 package org.figis.search.web.resource;
 
-import java.util.ArrayList;
-
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.ws.rs.GET;
@@ -18,8 +16,8 @@ import org.fao.fi.factsheetwebservice.domain.FactsheetDomain;
 import org.figis.search.config.elements.Index;
 import org.figis.search.service.Action;
 import org.figis.search.service.IndexResponse;
-import org.figis.search.service.IndexResponse.OperationStatus;
 import org.figis.search.service.IndexService;
+import org.figis.search.service.ProvideFailed;
 
 import com.wordnik.swagger.annotations.Api;
 import com.wordnik.swagger.annotations.ApiOperation;
@@ -52,7 +50,7 @@ public class IndexResource {
 			@PathParam("domain") @ApiParam(value = "the factsheet domain", required = true) FactsheetDomain domain) {
 
 		if (index == null || action == null || domain == null) {
-			return provideFailed();
+			return ProvideFailed.provide();
 		} else {
 			return service.actionOnDomain(action, index, domain);
 		}
@@ -76,32 +74,13 @@ public class IndexResource {
 			@PathParam("action") @ApiParam(value = "action", required = true) Action action,
 			@PathParam("domain") @ApiParam(value = "the factsheet domain", required = true) FactsheetDomain domain,
 			@PathParam("factsheet") @ApiParam(value = "the factsheet", required = true) String factsheet) {
+
 		if (index == null || action == null || domain == null || StringUtils.isBlank(factsheet)) {
-			return provideFailed();
+			return ProvideFailed.provide();
 		} else {
-			IndexResponse r;
-			switch (action) {
-			case update:
-				r = service.updateFactsheet(index, domain, factsheet);
-				break;
-			case delete:
-				r = service.deleteFactsheet(index, domain, factsheet);
-				break;
-			case unknown:
-			default:
-				r = provideFailed();
-				break;
-			}
+			IndexResponse r = service.actionOnFactsheet(action, index, domain, factsheet);
 			return r;
 		}
-	}
-
-	private IndexResponse provideFailed() {
-		IndexResponse r = new IndexResponse();
-		r.setOperationStatus(OperationStatus.FAILED);
-		r.setMessageList(new ArrayList<String>());
-		r.getMessageList().add("No valid action specified");
-		return r;
 	}
 
 }

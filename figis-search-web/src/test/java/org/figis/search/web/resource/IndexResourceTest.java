@@ -70,8 +70,8 @@ public class IndexResourceTest {
 		r.setOperationStatus(OperationStatus.SUCCEEDED);
 		when(s.actionOnDomain(Action.update, index, domain)).thenReturn(r);
 		when(s.actionOnDomain(Action.delete, index, domain)).thenReturn(r);
-		when(s.updateFactsheet(index, domain, factsheet)).thenReturn(r);
-		when(s.deleteFactsheet(index, domain, factsheet)).thenReturn(r);
+		when(s.actionOnFactsheet(Action.update, index, domain, factsheet)).thenReturn(r);
+		when(s.actionOnFactsheet(Action.delete, index, domain, factsheet)).thenReturn(r);
 		return s;
 	}
 
