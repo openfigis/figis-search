@@ -5,7 +5,7 @@ import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
 
-import org.fao.fi.services.factsheet.FisheryResourceNamespace;
+import org.fao.fi.factsheetwebservice.domain.util.FisheryResourceNamespace;
 import org.figis.search.config.ref.FigisSearchException;
 import org.w3c.dom.Document;
 
