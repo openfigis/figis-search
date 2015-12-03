@@ -726,7 +726,7 @@
 	<!-- the FIRMS Aquatic Resource search terms -->
 	<!-- ===================================================================== -->
 	<objectType name="resource" meta="195000" base="/fi:FIGISDoc">
-		<keyword level="7" name="name" base="fi:AqRes/fi:AqResIdent">
+		<keyword level="7" name="title" base="fi:AqRes/fi:AqResIdent">
 			<element name="dc:Title" />
 			<element name="dc:Title" lang="en" attrSetting="xml:lang=en" />
 			<element name="dc:Title" lang="fr" attrSetting="xml:lang=fr" />
@@ -735,7 +735,7 @@
 			<element name="dc:Title" lang="zh" attrSetting="xml:lang=zh" />
 			<element name="dc:Title" lang="ru" attrSetting="xml:lang=ru" />
 		</keyword>
-		<keyword level="7" name="name"
+		<keyword level="7" name="alternativeTitle"
 			base="fi:AqRes/fi:AqResIdent/fi:SpeciesList/fi:SpeciesRef">
 			<element name="dc:Title" />
 			<element name="dc:Title" lang="en" attrSetting="xml:lang=en" />
@@ -977,7 +977,7 @@
 	<!-- ===================================================================== -->
 	<!-- the FIRMS Fishery search terms -->
 	<!-- ===================================================================== -->
-	<objectType name="fishery" meta="205000" base="/fi:FIGISDoc">
+	<objectType name="title" meta="205000" base="/fi:FIGISDoc">
 		<keyword level="5" name="name" base="fi:Fishery/fi:FisheryIdent">
 			<element name="dc:Title" />
 			<element name="dc:Title" lang="en" attrSetting="xml:lang=en" />
@@ -987,7 +987,7 @@
 			<element name="dc:Title" lang="zh" attrSetting="xml:lang=zh" />
 			<element name="dc:Title" lang="ru" attrSetting="xml:lang=ru" />
 		</keyword>
-		<keyword name="name"
+		<keyword name="alternativeTitle"
 			base="fi:Fishery/fi:FisheryIdent/fi:AdditionalRefData">
 			<element name="dcterms:Alternative" />
 		</keyword>
