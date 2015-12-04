@@ -977,8 +977,8 @@
 	<!-- ===================================================================== -->
 	<!-- the FIRMS Fishery search terms -->
 	<!-- ===================================================================== -->
-	<objectType name="title" meta="205000" base="/fi:FIGISDoc">
-		<keyword level="5" name="name" base="fi:Fishery/fi:FisheryIdent">
+	<objectType name="fishery" meta="205000" base="/fi:FIGISDoc">
+		<keyword level="5" name="title" base="fi:Fishery/fi:FisheryIdent">
 			<element name="dc:Title" />
 			<element name="dc:Title" lang="en" attrSetting="xml:lang=en" />
 			<element name="dc:Title" lang="fr" attrSetting="xml:lang=fr" />
