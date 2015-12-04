@@ -81,16 +81,11 @@ public class Doc2SolrInputDocument {
 						throw new FigisSearchException(
 								"Some null values are not anticipated, key = " + key + "; Expr = " + expr);
 					}
-
 					String value = fp.xpathSingleValue(x, expr, document);
-
-					// System.out.println(expr + " - " + value);
 
 					// post condition
 					if (!StringUtils.isEmpty(value)) {
-
-						System.out.println(expr + " - " + k.getName() + " - " + value);
-
+						// System.out.println(expr + " - " + k.getName() + " - " + value);
 						s.addField(k.getName(), value);
 					}
 				}
