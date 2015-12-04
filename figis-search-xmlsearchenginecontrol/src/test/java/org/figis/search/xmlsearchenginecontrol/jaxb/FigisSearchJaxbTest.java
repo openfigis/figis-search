@@ -32,6 +32,9 @@ public class FigisSearchJaxbTest {
 		assertEquals(8, c.getObjectTypeList().get(0).getKeyWordList().size());
 		assertEquals(7, c.getObjectTypeList().get(0).getKeyWordList().get(0).getElementList().size());
 		for (ObjectType o : c.getObjectTypeList()) {
+			if (o.getName() != null && (o.getName().equals("resource") || o.getName().equals("resource"))) {
+				assertTrue(o.getKeyWordList().get(0).getName().equals("title"));
+			}
 			for (KeyWord k : o.getKeyWordList()) {
 				if (k.getElementList() == null) {
 					// TODO this does not work yet, see also the work on
@@ -46,6 +49,11 @@ public class FigisSearchJaxbTest {
 				}
 			}
 		}
+	}
+
+	private void assertTrue(boolean equals) {
+		// TODO Auto-generated method stub
+
 	}
 
 	private void assertNotNull(Element e) {
