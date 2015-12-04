@@ -5,7 +5,6 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.fail;
 
 import java.io.File;
-import java.util.List;
 
 import javax.xml.transform.Source;
 import javax.xml.transform.TransformerException;
@@ -17,7 +16,6 @@ import javax.xml.transform.stream.StreamSource;
 import org.apache.solr.common.SolrInputDocument;
 import org.apache.solr.common.StringUtils;
 import org.fao.fi.factsheetwebservice.domain.FactsheetDomain;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.w3c.dom.Document;
 
@@ -28,14 +26,12 @@ public class Doc2SolrInputDocumentTest {
 	FactsheetDomain domain = FactsheetDomain.resource;
 
 	@Test
-	@Ignore
 	public void testExtract() {
 		SolrInputDocument s = d.extract(loadXML()).basedOn(domain);
 		assertEquals(17, s.getFieldNames().size(), 2);
 
-		@SuppressWarnings("unchecked")
-		List<String> names = (List<String>) s.getField("name").getValue();
-		assertEquals(names.size(), 2);
+		String name = (String) s.getField("title").getValue();
+		assertEquals(name, "Antarctic krill - High Latitude, Eastern Indian Ocean");
 
 		for (String fieldName : s.getFieldNames()) {
 			// System.out.println(fieldName);

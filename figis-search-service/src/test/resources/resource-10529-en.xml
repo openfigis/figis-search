@@ -68,8 +68,7 @@
 	</fi:ObjectSource>
 	<fi:AqRes>
 		<fi:AqResIdent Factsheet="true" RefObservation="false">
-			<dc:Title>Antarctic krill - High Latitude, Eastern Indian Ocean
-			</dc:Title>
+			<dc:Title>Antarctic krill - High Latitude, Eastern Indian Ocean</dc:Title>
 			<fi:FigisID>10529</fi:FigisID>
 			<fi:SpeciesList>
 				<fi:SpeciesRef>
