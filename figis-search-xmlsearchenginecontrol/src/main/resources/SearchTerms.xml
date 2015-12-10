@@ -5,7 +5,7 @@
 	<!-- the Static XML search terms -->
 	<!-- ===================================================================== -->
 	<objectType name="staticxml.eaftool" meta="1018" base="/fi:FIGISDoc">
-		<keyword name="name" base="fi:EAFTool/fi:EAFToolIdent">
+		<keyword name="title" base="fi:EAFTool/fi:EAFToolIdent">
 			<element name="dc:Title" />
 			<element name="dc:Title" lang="en" attrSetting="xml:lang=en" />
 			<element name="dc:Title" lang="fr" attrSetting="xml:lang=fr" />
@@ -44,7 +44,7 @@
 	</objectType>
 	<!-- psm static XML pages -->
 	<objectType name="staticxml.psm" meta="1016" base="/fi:FIGISDoc">
-		<keyword name="name" base="fi:PortStateMeasure/fi:PortStateMeasureIdent">
+		<keyword name="title" base="fi:PortStateMeasure/fi:PortStateMeasureIdent">
 			<element name="dc:Title" />
 			<element name="dc:Title" lang="en" attrSetting="xml:lang=en" />
 			<element name="dc:Title" lang="fr" attrSetting="xml:lang=fr" />
@@ -103,7 +103,7 @@
 			<element name="fi:WaterAreaRef" attr="Code" />
 			<!-- attrSetting="CodeSystem=Statistical" : this is wrong at least it can be CodeSystem="FAO_area" -->
 		</keyword>
-		<keyword name="name" base="fi:Area/fi:AreaIdent">
+		<keyword name="title" base="fi:Area/fi:AreaIdent">
 			<element name="fi:Name" />
 			<element name="fi:WaterAreaRef" attr="Code" />
 		</keyword>
@@ -123,7 +123,7 @@
 			<element name="dc:Title" lang="ru" attrSetting="xml:lang=ru" />
 			<element name="dc:Identifier" />
 		</keyword>
-		<keyword name="name" base="fi:Collection/fi:CollectionIdent">
+		<keyword name="title" base="fi:Collection/fi:CollectionIdent">
 			<!-- level="10" -->
 			<element name="dc:Title" />
 			<element name="dc:Title" lang="en" attrSetting="xml:lang=en" />
@@ -144,7 +144,7 @@
 			<element name="fi:Name" />
 			<element attr="Code" />
 		</keyword>
-		<keyword name="name" base="fi:CountrySector/fi:CountrySectorIdent/fi:LandAreaRef">
+		<keyword name="title" base="fi:CountrySector/fi:CountrySectorIdent/fi:LandAreaRef">
 			<element name="fi:Name" />
 		</keyword>
 		<keyword name="continent" base="fi:CountrySector/fi:CountrySectorIdent/fi:LandAreaRef/fi:LandParent/fi:LandAreaRef">
@@ -178,7 +178,7 @@
 			<element name="dc:Title" />
 			<element attr="Code" />
 		</keyword>
-		<keyword name="name" base="fi:CountrySector/fi:CountrySectorIdent/fi:LandAreaRef">
+		<keyword name="title" base="fi:CountrySector/fi:CountrySectorIdent/fi:LandAreaRef">
 			<element name="dc:Title" />
 		</keyword>
 		<keyword name="continent" base="fi:CountrySector/fi:CountrySectorIdent/fi:LandAreaRef/fi:LandParent/fi:LandAreaRef">
@@ -223,7 +223,7 @@
 			<element name="dc:Title" lang="zh" attrSetting="xml:lang=zh" />
 			<element name="dc:Title" lang="ru" attrSetting="xml:lang=ru" />
 		</keyword>
-		<keyword name="name" base="fi:CultureSpecies/fi:CultureSpeciesIdent/fi:SpeciesRef/fi:FAOName">
+		<keyword name="title" base="fi:CultureSpecies/fi:CultureSpeciesIdent/fi:SpeciesRef/fi:FAOName">
 			<element name="dc:Title" />
 			<element name="dc:Title" lang="en" attrSetting="xml:lang=en" />
 			<element name="dc:Title" lang="fr" attrSetting="xml:lang=fr" />
@@ -246,7 +246,7 @@
 			<element name="dc:Title" lang="zh" attrSetting="xml:lang=zh" />
 			<element name="dc:Title" lang="ru" attrSetting="xml:lang=ru" />
 		</keyword>
-		<keyword name="name" base="fi:FishEquip/fi:FishEquipIdent">
+		<keyword name="title" base="fi:FishEquip/fi:FishEquipIdent">
 			<element name="dc:Title" />
 			<element name="dc:Title" lang="en" attrSetting="xml:lang=en" />
 			<element name="dc:Title" lang="fr" attrSetting="xml:lang=fr" />
@@ -272,7 +272,7 @@
 		<keyword name="country" base="fi:LegalFramework/fi:LegalFrameworkIdent">
 			<element name="fi:LandAreaRef" attr="Code" />
 		</keyword>
-		<keyword name="name" base="fi:LegalFramework/fi:LegalFrameworkIdent">
+		<keyword name="title" base="fi:LegalFramework/fi:LegalFrameworkIdent">
 			<element name="dc:Title" />
 			<element name="dc:Title" lang="en" attrSetting="xml:lang=en" />
 			<element name="dc:Title" lang="fr" attrSetting="xml:lang=fr" />
@@ -293,7 +293,7 @@
 			<element name="dc:Title" lang="zh" attrSetting="xml:lang=zh" />
 			<element name="dc:Title" lang="ru" attrSetting="xml:lang=ru" />
 		</keyword>
-		<keyword name="name" base="fi:Ontology/fi:OntologyIdent">
+		<keyword name="title" base="fi:Ontology/fi:OntologyIdent">
 			<element name="dc:Title" />
 			<element name="dc:Title" lang="en" attrSetting="xml:lang=en" />
 			<element name="dc:Title" lang="fr" attrSetting="xml:lang=fr" />
@@ -321,7 +321,7 @@
 			<element name="fi:OrgParent/fi:OrgRef/fi:Name" />
 			<element name="fi:OrgParent/fi:OrgRef/fi:LandAreaRef" attr="Code" />
 		</keyword>
-		<keyword name="name" base="fi:Org/fi:OrgIdent">
+		<keyword name="title" base="fi:Org/fi:OrgIdent">
 			<element name="fi:Name" />
 			<element name="fi:OrgID" attr="Code" attrSetting="CodeSystem=Acronym" />
 		</keyword>
@@ -420,7 +420,7 @@
 	<!-- the Geartype search terms -->
 	<!-- ===================================================================== -->
 	<objectType name="geartype" meta="50000" base="/fi:FIGISDoc">
-		<keyword name="name" base="fi:Geartype/fi:GeartypeIdent">
+		<keyword name="title" base="fi:Geartype/fi:GeartypeIdent">
 			<element name="dc:Title" />
 			<element name="dc:Title" lang="en" attrSetting="xml:lang=en" />
 			<element name="dc:Title" lang="fr" attrSetting="xml:lang=fr" />
@@ -450,7 +450,7 @@
 	<!-- the Vesseltype search terms -->
 	<!-- ===================================================================== -->
 	<objectType name="vesseltype" meta="64000" base="/fi:FIGISDoc">
-		<keyword name="name" base="fi:Vesseltype/fi:VesseltypeIdent">
+		<keyword name="title" base="fi:Vesseltype/fi:VesseltypeIdent">
 			<element name="dc:Title" />
 			<element name="dc:Title" lang="en" attrSetting="xml:lang=en" />
 			<element name="dc:Title" lang="fr" attrSetting="xml:lang=fr" />
@@ -480,7 +480,7 @@
 	<!-- the Fishtech search terms -->
 	<!-- ===================================================================== -->
 	<objectType name="fishtech" meta="70000" base="/fi:FIGISDoc">
-		<keyword name="name" base="fi:FishTechnique/fi:FishTechniqueIdent">
+		<keyword name="title" base="fi:FishTechnique/fi:FishTechniqueIdent">
 			<element name="dc:Title" />
 			<element name="dc:Title" lang="en" attrSetting="xml:lang=en" />
 			<element name="dc:Title" lang="fr" attrSetting="xml:lang=fr" />
@@ -586,7 +586,7 @@
 	<!-- the Introduced Species search terms -->
 	<!-- ===================================================================== -->
 	<objectType name="introsp" meta="175000" base="/fi:FIGISDoc">
-		<keyword name="name" base="fi:IntroducedAqSpecies/fi:IntroducedAqSpeciesIdent/fi:AqSpeciesIdent/fi:FAOName">
+		<keyword name="title" base="fi:IntroducedAqSpecies/fi:IntroducedAqSpeciesIdent/fi:AqSpeciesIdent/fi:FAOName">
 			<element name="fi:En" />
 			<element name="fi:Fr" lang="fr" />
 			<element name="fi:Sp" lang="es" />
@@ -1099,7 +1099,7 @@
 	<!-- the organization search terms -->
 	<!-- ===================================================================== -->
 	<objectType name="organization" meta="104000" base="/fi:FIGISDoc">
-		<keyword name="name" base="fi:Org/fi:OrgIdent">
+		<keyword name="title" base="fi:Org/fi:OrgIdent">
 			<element name="dc:Title" />
 			<element name="dc:Title" lang="en" attrSetting="xml:lang=en" />
 			<element name="dc:Title" lang="fr" attrSetting="xml:lang=fr" />
@@ -1116,7 +1116,7 @@
 		</keyword>
 	</objectType>
 	<objectType name="vme" meta="172000" base="/fi:FIGISDoc">
-		<keyword name="name" base="fi:VME/fi:VMEIdent">
+		<keyword name="title" base="fi:VME/fi:VMEIdent">
 			<element name="dc:Title" />
 			<element name="dc:Title" lang="en" attrSetting="xml:lang=en" />
 			<element name="dc:Title" lang="fr" attrSetting="xml:lang=fr" />
